@@ -2,6 +2,15 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet' type='text/css' href='/stylesheets/style.css')
-  body
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(defer src='https://use.fontawesome.com/releases/v5.0.7/js/all.js')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/trello-style.css')
+    link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+    script(src='https://cdn.auth0.com/js/auth0/8.7/auth0.min.js')
+    script(src='/javascripts/trello.js')
+  body(style='background-color:#001c0d')
+    nav.w3-bar.w3-border.w3-light-grey(role='navigation')
+      .w3-bar-item.w3-text-grey Auth0 - NodeJS
+      a.w3-bar-item.w3-button(href='/') Home
+      a#qsLoginBtn.w3-bar-item.w3-button(href='/login') Login
     block content

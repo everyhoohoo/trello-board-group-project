@@ -26,6 +26,11 @@
     width: 12px; 
 }
 
+.w3-container a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
 .container {
     border: solid 2px #70FF68;
     background-color: #125e53;
