@@ -12,12 +12,13 @@ $(document).ready(function() {
     });
 });
 var newSLane;
-
+var userID = user.user_id;
 
 function renderEXSwimlanes() {
     $.ajax({
             method: "GET",
             url: "http://localhost:8080/swimlanes",
+            data: {user_id: userID},
 
         })
         .done(function(swimlanes) {
