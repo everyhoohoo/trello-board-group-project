@@ -6,15 +6,39 @@ html
     script(defer src='https://use.fontawesome.com/releases/v5.0.7/js/all.js')
     link(rel='stylesheet', type='text/css', href='/stylesheets/trello-style.css')
     link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src='https://cdn.auth0.com/js/auth0/8.7/auth0.min.js')
     script(src='/javascripts/trello.js')
-  body(style='background-color:#001c0d')
-    nav.w3-bar.w3-border.w3-light-grey(role='navigation')
-      .w3-bar-item.w3-text-grey Auth0 - NodeJS
-      a.w3-bar-item.w3-button(href='/') Home
-      if loggedIn
-        a( href="/user" ).w3-bar-item.w3-button Profile
-        a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button Logout
-      else
-        a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button Login
+  //body(style='background-color:#001c0d')
+  //  nav.w3-bar.w3-border.w3-light-grey(role='navigation')
+  //    .w3-bar-item.w3-text-grey Auth0 - NodeJS
+  //    a.w3-bar-item.w3-button(href='/') Home
+  //    if loggedIn
+  //      a( href="/user" ).w3-bar-item.w3-button Profile
+  //      a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button Logout
+  //    else
+  //      a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button Login
+  body
+    .background-wallpaper
+      .container-fluid
+        .row
+          .col-sm-8
+            p.home-heading AGILE SHARK BOARD
+            p.statement Organize your life
+          .col-sm-4
+        .row
+          .col-sm-8
+            button#btn-home-view.btn.btn-primary.btn-margin.home
+              | Home
+            if loggedIn
+              a( href="/user" ).w3-bar-item.w3-button Profile
+              a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
+            else
+              a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
+          .col-sm-4
     block content
+
+
+
+
