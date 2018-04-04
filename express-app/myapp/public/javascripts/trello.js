@@ -71,16 +71,12 @@ function getNewId() {
 
 function addBoard (id, boardName) {
     let newBoard =
-            '<div class="board" id="id">' +
-                '<div class="boardName"> boardName </div>' +
-            '</div>';
-    // newBoard = $("<div>", {"id": id, "class": "board"});
-    var boardName = $('<div class : "boardName">' + boardName + '</div>');
-    $('.w3-container').append(newBoard);
-    newBoard.append(boardName);
-
-    // var boardName = $('<div class : "boardName">' + boardName + '</div>');
+            '<div style="text-align:center">  <input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>' +
+            '<div class="container" id="id"></div>';
+    var boardName = $('<div class="boardName">' + boardName + '</div>');
+    $('.w3-container').append(boardName, newBoard);
     // newBoard.append(boardName);
+
 }
 
 function addSwimLane(id, name) {
