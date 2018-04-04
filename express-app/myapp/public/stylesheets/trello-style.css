@@ -40,12 +40,29 @@
     overflow: auto;
 }
 
+.board {
+    border: solid 2px #70FF68;
+    background-color: #125e53;
+    width: 95%;
+    height: 94vh;
+    display: flex;
+    overflow: auto;
+    margin: 20px;
+
+}
+
 .swimlane {
     width: 200px;
     border: solid 1px #222222;
     background-color: #547570;
     flex-basis: 200px;
 /*    overflow-y: auto;*/
+}
+
+.boardName {
+    color: white;
+    font-size: 14px;
+    justify-content: center;
 }
 
 .swimelaneName {

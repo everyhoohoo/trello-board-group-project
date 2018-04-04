@@ -1,16 +1,31 @@
 $(document).ready(function() {
+
+    $('#createBoard').on('click', function () {
+        var boardName = prompt('Name of new board');
+        console.log(boardName);
+        if (boardName === null) {
+            return;
+        }
+        var id = getNewId();
+        addBoard(id, boardName);
+        // saveBoard({id: id, name: boardName});
+
+    });
+
+
     renderEXSwimlanes();
 
-    $('#startBtn').on('click', function() {
+    $('#createSwimlane').on('click', function () {
         var slName = prompt('Name of new swimlane');
         if (slName === null) {
             return;
         }
         var id = getNewId();
         addSwimLane(id, slName);
-        saveSwimLane({ id: id, name: slName });
+        saveSwimLane({id: id, name: slName});
     });
 });
+
 var newSLane;
 
 
@@ -54,6 +69,19 @@ function getNewId() {
   )
 }
 
+function addBoard (id, boardName) {
+    let newBoard =
+            '<div class="board" id="id">' +
+                '<div class="boardName"> boardName </div>' +
+            '</div>';
+    // newBoard = $("<div>", {"id": id, "class": "board"});
+    var boardName = $('<div class : "boardName">' + boardName + '</div>');
+    $('.w3-container').append(newBoard);
+    newBoard.append(boardName);
+
+    // var boardName = $('<div class : "boardName">' + boardName + '</div>');
+    // newBoard.append(boardName);
+}
 
 function addSwimLane(id, name) {
 
@@ -152,6 +180,17 @@ function addCard(id, swimlaneID, title, description) {
 
     $("#" + swimlaneID).append(card);
 };
+
+function saveBoard(board) {
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/boards",
+        data: board
+    })
+        .done(function(board){
+            alert("Saved Board: " + board);
+        })
+}
 
 function saveSwimLane(swimlane) {
     $.ajax({
