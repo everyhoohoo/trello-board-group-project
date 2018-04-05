@@ -8,26 +8,28 @@ $(document).ready(function() {
         }
         var id = getNewId();
         addSwimLane(id, slName);
-        saveSwimLane({ id: id, name: slName });
+        saveSwimLane({ id: id, user_id: userID, name: slName });
     });
 });
 var newSLane;
 
-
 function renderEXSwimlanes() {
+    
     $.ajax({
             method: "GET",
             url: "http://localhost:8080/swimlanes",
+            data: {"user_id": userID} 
 
+        }).fail(function(err){
+            break;
         })
         .done(function(swimlanes) {
-            console.log(swimlanes);
 
-            for (var i = 0; i < swimlanes.length; i++) {
-                var swimlane = swimlanes[i];
-                addSwimLane(swimlane.id, swimlane.name);
-                renderEXCards(swimlane.id);
-            }
+                for (var i = 0; i < swimlanes.length; i++) {
+                    var swimlane = swimlanes[i];
+                    addSwimLane(swimlane.id, swimlane.name);
+                    renderEXCards(swimlane.id);
+                }
         });
 
 }
@@ -205,7 +207,7 @@ function deleteSwimlane(slID){
         .done(function(swimlanes) {
             alert("Any Cards In Swimlane " + slID + " Were Deleted.");
         });
-                $.ajax({
+        $.ajax({
             method: "DELETE",
             url: 'http://localhost:8080/swimlanes/' + slID,
         })

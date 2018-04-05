@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    //script(data-main="/public/javascripts/scripts.js" src="/public/javascripts/require.js")
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(defer src='https://use.fontawesome.com/releases/v5.0.7/js/all.js')
     link(rel='stylesheet', type='text/css', href='/stylesheets/trello-style.css')
@@ -9,16 +10,7 @@ html
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src='https://cdn.auth0.com/js/auth0/8.7/auth0.min.js')
-    script(src='/javascripts/trello.js')
-  //body(style='background-color:#001c0d')
-  //  nav.w3-bar.w3-border.w3-light-grey(role='navigation')
-  //    .w3-bar-item.w3-text-grey Auth0 - NodeJS
-  //    a.w3-bar-item.w3-button(href='/') Home
-  //    if loggedIn
-  //      a( href="/user" ).w3-bar-item.w3-button Profile
-  //      a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button Logout
-  //    else
-  //      a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button Login
+    //script(src='/javascripts/trello.js')
   body
     .background-wallpaper
       .container-fluid
@@ -32,13 +24,9 @@ html
             button#btn-home-view.btn.btn-primary.btn-margin.home
               | Home
             if loggedIn
-              a( href="/user" ).w3-bar-item.w3-button Profile
+              a( id="qsProfileBtn" href="/user" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Profile
               a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
             else
               a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
           .col-sm-4
     block content
-
-
-
-

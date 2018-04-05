@@ -15,6 +15,7 @@ dotenv.load();
 
 const index = require('./routes/index');
 const user = require('./routes/user');
+// var userProfile = user;
 //const trello = require('./routes/trello');
 
 // This will configure Passport to use Auth0

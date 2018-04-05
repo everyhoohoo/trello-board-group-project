@@ -4,7 +4,10 @@ block content
   br
   .w3-container
     .w3-card-4.w3-center(style="padding: 15px;")
-      img(src=user.picture)
-      p Welcome #{user.nickname}
+      img(src=user.auth0.picture)
+      p Welcome #{user.auth0.nickname}
       input(id="startBtn" type="button" value="Add Swimlane" style="border-radius: 4px; background-color: #212529; border-color: #212529; color: #CFCFCF;")
       div(class='container')
+script.
+  var userid = #{user.auth0.user_id}
+script(src='/javascripts/trello.js')

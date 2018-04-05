@@ -8,7 +8,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 // setup the mysql configuration
-const sql = new Sequelize('trello', 'root', 'P@tches1238', {
+const sql = new Sequelize('trello', 'root', 's1mplePa55word456951', {
   host: 'localhost',
   port: 3306,
   dialect: 'mysql',
@@ -30,9 +30,15 @@ sql
     console.log("There was an error when connecting!");
   });
 
+var UserProfile = sql.define('user', {
+  user_id:{ type: Sequelize.STRING, primaryKey: true,}
+  //board_id:{ type: Sequelize.STRING,}
+});
+
 //Columnlane is the same as a swimlane
 var Columnlane = sql.define('swimlane', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+  user_id: { type: Sequelize.STRING, },//foreignKey: true 
   name: { type: Sequelize.STRING }
 });
 
@@ -44,6 +50,8 @@ var RowCells = sql.define('card', {
   description: { type: Sequelize.STRING }
 });
 
+UserProfile.hasMany(Columnlane, {foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+
 sql.sync();
 
 // let swimlanes = []
@@ -53,11 +61,43 @@ function getHomePage(req, res, next) {
 	res.send("This is just a plain boring HomePage.");
 }
 
-var Swimlane = function (id, name) {
+var User = function (user_id) {//, board_id
+  this.user_id = user_id;
+  //this.board_id = board_id;
+}
 
+function getUsers(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); 
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  var userID = req.query.user_id;
+  console.log("You are in getUsers " + userID);
+  UserProfile.findAll({where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
+    if (users === undefined || users.length == 0){
+      res.send(404);
+    }
+    else {
+      res.send(users);
+    }
+  })
+}
+
+function postUsers(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+  UserProfile.create({
+    user_id: req.query.user_id
+  }).then((users) => {
+    res.send(users);
+  });
+
+}
+
+
+var Swimlane = function (id, user_id, name) {
   this.id = id;
+  this.user_id = user_id;
   this.name = name;
-
 }
 
 function getSwimLanes(req, res, next) {
@@ -65,14 +105,21 @@ function getSwimLanes(req, res, next) {
   // These headers comply with CORS and allow us to serve our response to any origin
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
- //find the appropriate data
-  Columnlane.findAll({order:[ ['createdAt', 'ASC'] ]}).then((swimlanes) => {
-    res.send(swimlanes);
+  var userIDProfile = req.body.user_id;
+  //find the appropriate data
+  Columnlane.findAll({where: {user_id: userIDProfile}, order:[ ['createdAt', 'ASC'] ]}).then((swimlanes) => {
+    if (swimlanes == null){ 
+      //send 404
+      //or send body
+      console.log("User does not exist!");
+      res.send(404);
+    }
+    else {
+      res.send(swimlanes);
+    }
   });
     //res.send(swimlanes);
-}
-
+} 
 
 function postSwimLanes(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -246,11 +293,12 @@ function deleteCard(req, res, next){
 }
 
 // Set up our routes and start the server
-
+server.get('/users', getUsers);
 server.get('/swimlanes', getSwimLanes);
 server.get('/swimlanes/:swimlane_id/cards', getCardsBySwimlaneId);
 server.get('/cards', getCards);
 
+server.post('/users', postUsers);
 server.post('/swimlanes', postSwimLanes);
 server.post('/swimlanes/:swimlane_id', updateSwimlaneBySwimlaneId);
 server.post('/cards', postCards);
