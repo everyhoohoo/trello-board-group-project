@@ -12,10 +12,9 @@ $(document).ready(function() {
 
     });
 
-
     renderEXSwimlanes();
 
-    $('#createSwimlane').on('click', function () {
+    $('.w3-container').on('click', '.createSwimlane', function () {
         var slName = prompt('Name of new swimlane');
         if (slName === null) {
             return;
@@ -71,7 +70,7 @@ function getNewId() {
 
 function addBoard (id, boardName) {
     let newBoard =
-            '<div style="text-align:center">  <input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>' +
+            '<div style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>' +
             '<div class="container" id="id"></div>';
     var boardName = $('<div class="boardName">' + boardName + '</div>');
     $('.w3-container').append(boardName, newBoard);
