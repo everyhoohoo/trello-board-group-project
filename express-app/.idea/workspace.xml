@@ -37,20 +37,23 @@
       <file leaf-file-name="layout.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myapp/views/layout.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="29" column="12" lean-forward="false" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-              <folding />
+            <state relative-caret-position="380">
+              <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+              <folding>
+                <marker date="1522966192465" expanded="true" signature="17:622" ph="..." />
+                <marker date="1522966192465" expanded="true" signature="24:622" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="trello.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="trello.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myapp/public/javascripts/trello.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-468">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="147" column="33" lean-forward="false" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
               <folding>
-                <marker date="1522889499734" expanded="true" signature="1812:1829" ph="..." />
+                <marker date="1522967081416" expanded="true" signature="2331:2348" ph="..." />
               </folding>
             </state>
           </provider>
@@ -76,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="trello-style.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="trello-style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myapp/public/stylesheets/trello-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="121" column="1" lean-forward="false" selection-start-line="121" selection-start-column="1" selection-end-line="121" selection-end-column="1" />
+            <state relative-caret-position="433">
+              <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -90,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/myapp/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="19">
-              <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+              <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -100,8 +103,10 @@
         <entry file="file://$PROJECT_DIR$/myapp/routes/user.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+              <folding>
+                <marker date="1522966192464" expanded="true" signature="1078:1102" ph="{&quot;user&quot;: req.user...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,11 +115,11 @@
         <entry file="file://$PROJECT_DIR$/myapp/views/user.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
-              <caret line="8" column="155" lean-forward="true" selection-start-line="8" selection-start-column="155" selection-end-line="8" selection-end-column="155" />
+              <caret line="8" column="155" lean-forward="false" selection-start-line="8" selection-start-column="155" selection-end-line="8" selection-end-column="155" />
               <folding>
-                <marker date="1522886367541" expanded="true" signature="21:177" ph="..." />
-                <marker date="1522886367541" expanded="true" signature="50:177" ph="..." />
-                <marker date="1522886367541" expanded="true" signature="65:177" ph="..." />
+                <marker date="1522966192466" expanded="true" signature="21:177" ph="..." />
+                <marker date="1522966192466" expanded="true" signature="50:177" ph="..." />
+                <marker date="1522966192466" expanded="true" signature="65:177" ph="..." />
               </folding>
             </state>
           </provider>
@@ -130,8 +135,8 @@
         <option value="$PROJECT_DIR$/myapp/views/layout.jade" />
         <option value="$PROJECT_DIR$/myapp/views/board.jade" />
         <option value="$PROJECT_DIR$/myapp/views/user.jade" />
-        <option value="$PROJECT_DIR$/myapp/public/stylesheets/trello-style.css" />
         <option value="$PROJECT_DIR$/myapp/public/javascripts/trello.js" />
+        <option value="$PROJECT_DIR$/myapp/public/stylesheets/trello-style.css" />
       </list>
     </option>
   </component>
@@ -256,7 +261,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26269000" />
+    <option name="totallyTimeSpent" value="26959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="-69" width="1920" height="1080" extended-state="0" />
@@ -394,7 +399,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
-          <folding />
+          <folding>
+            <marker date="1522966192465" expanded="true" signature="17:622" ph="..." />
+            <marker date="1522966192465" expanded="true" signature="24:622" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -403,7 +411,7 @@
         <state relative-caret-position="-3811">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1522889499734" expanded="true" signature="1812:1829" ph="..." />
+            <marker date="1522967081416" expanded="true" signature="2331:2348" ph="..." />
           </folding>
         </state>
       </provider>
@@ -414,9 +422,9 @@
         <state relative-caret-position="190">
           <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
           <folding>
-            <marker date="1522886367541" expanded="true" signature="21:177" ph="..." />
-            <marker date="1522886367541" expanded="true" signature="50:177" ph="..." />
-            <marker date="1522886367541" expanded="true" signature="65:177" ph="..." />
+            <marker date="1522966192466" expanded="true" signature="21:177" ph="..." />
+            <marker date="1522966192466" expanded="true" signature="50:177" ph="..." />
+            <marker date="1522966192466" expanded="true" signature="65:177" ph="..." />
           </folding>
         </state>
       </provider>
@@ -450,7 +458,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1522966192465" expanded="true" signature="17:622" ph="..." />
+            <marker date="1522966192465" expanded="true" signature="24:622" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -520,11 +531,11 @@
     <entry file="file://$PROJECT_DIR$/myapp/views/user.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="8" column="155" lean-forward="true" selection-start-line="8" selection-start-column="155" selection-end-line="8" selection-end-column="155" />
+          <caret line="8" column="155" lean-forward="false" selection-start-line="8" selection-start-column="155" selection-end-line="8" selection-end-column="155" />
           <folding>
-            <marker date="1522886367541" expanded="true" signature="21:177" ph="..." />
-            <marker date="1522886367541" expanded="true" signature="50:177" ph="..." />
-            <marker date="1522886367541" expanded="true" signature="65:177" ph="..." />
+            <marker date="1522966192466" expanded="true" signature="21:177" ph="..." />
+            <marker date="1522966192466" expanded="true" signature="50:177" ph="..." />
+            <marker date="1522966192466" expanded="true" signature="65:177" ph="..." />
           </folding>
         </state>
       </provider>
@@ -537,19 +548,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/routes/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <marker date="1522966192464" expanded="true" signature="1078:1102" ph="{&quot;user&quot;: req.user...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -561,19 +566,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/public/stylesheets/trello-style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="121" column="1" lean-forward="false" selection-start-line="121" selection-start-column="1" selection-end-line="121" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/views/layout.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" column="12" lean-forward="false" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="380">
+          <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+          <folding>
+            <marker date="1522966192465" expanded="true" signature="17:622" ph="..." />
+            <marker date="1522966192465" expanded="true" signature="24:622" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -593,13 +593,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/public/javascripts/trello.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-468">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="147" column="33" lean-forward="false" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
           <folding>
-            <marker date="1522889499734" expanded="true" signature="1812:1829" ph="..." />
+            <marker date="1522967081416" expanded="true" signature="2331:2348" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/public/stylesheets/trello-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>

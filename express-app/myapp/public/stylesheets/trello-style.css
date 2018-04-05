@@ -1,29 +1,29 @@
-::-webkit-scrollbar-button { 
-    display: block; height: 13px; border-radius: 0px; background-color: #001c0d; 
+::-webkit-scrollbar-button {
+    display: block; height: 13px; border-radius: 0px; background-color: #001c0d;
 }
 
-::-webkit-scrollbar-button:hover { 
-    background-color: #808080; 
-} 
+::-webkit-scrollbar-button:hover {
+    background-color: #808080;
+}
 
-::-webkit-scrollbar-thumb { 
-    background-color: #000000; border-radius: 10px; 
-} 
+::-webkit-scrollbar-thumb {
+    background-color: #000000; border-radius: 10px;
+}
 
-::-webkit-scrollbar-thumb:hover { 
-    background-color: #378a54; 
-} 
+::-webkit-scrollbar-thumb:hover {
+    background-color: #378a54;
+}
 
-::-webkit-scrollbar-track { 
-    background-color: #135528; 
-} 
+::-webkit-scrollbar-track {
+    background-color: #135528;
+}
 
-::-webkit-scrollbar-track:hover { 
-    background-color: #80ff80; border-radius: 0px; 
-} 
+::-webkit-scrollbar-track:hover {
+    background-color: #80ff80; border-radius: 0px;
+}
 
-::-webkit-scrollbar { 
-    width: 12px; 
+::-webkit-scrollbar {
+    width: 12px;
 }
 
 .w3-container a {
@@ -57,7 +57,7 @@
     border: solid 1px #222222;
     background-color: #547570;
     flex-basis: 200px;
-/*    overflow-y: auto;*/
+    /*    overflow-y: auto;*/
 }
 
 .boardName {
@@ -67,11 +67,20 @@
 }
 
 .swimelaneName {
-    border: solid 1px #000000;
+    color: white;
+    margin: 5px;
+    text-align: center;
+    font-size: 18px;
+    border: solid 2px #000000;
 }
 
 .cardName {
-    border: solid 1px #000000;
+    color: lightgrey;
+    text-decoration: underline;
+    margin: 5px;
+    text-align: center;
+    font-size: 15px;
+    padding:3px;
 }
 
 .card {
@@ -79,6 +88,7 @@
     height: 200px;
     border: solid 1px #000000;
     background-color: #00a58c;
+    margin-top: 10px;
 }
 
 .card-buttons {
@@ -91,6 +101,7 @@
     display: flex;
     justify-content: space-between;
     cursor: default;
+    margin: 5px;
 }
 
 .fa-layers-text {

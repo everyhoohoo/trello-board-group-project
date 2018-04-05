@@ -100,7 +100,7 @@ function addSwimLane(id, name) {
 
     newSLane = $("<div>", { "id": id, "class": "swimlane" });
 
-    var slName = $('<div class :"swimelaneName">' + name + '</div>');
+    var slName = $('<div class="swimelaneName">' + name + '</div>');
     newSLane.append(slName);
 
     var laneButtons = $('<span class = "buttons"><input class= "addCardBtn" type="button" value="Add Card" click=""></input><i class="fas fa-pencil-alt icons"></i><input class="delBtn" type="button" value="X" click=""></input></span>');
@@ -145,7 +145,7 @@ function addSwimLane(id, name) {
 function addCard(id, swimlaneID, title, description) {
 
     var card = $("<div>", { "class": "card", "id": id});
-    var cardName = $('<div class :"cardName">' + title + '</div>');
+    var cardName = $('<div class="cardName">' + title + '</div>');
 
     card.append(cardName);
 
