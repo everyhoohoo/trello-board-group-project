@@ -91,9 +91,6 @@ function addBoard (id, userID, boardName) {
             '<div class="container" id="id"></div>';
     var boardName = $('<div class="boardName">' + boardName + '</div>');
     $('.w3-container').append(boardName, newBoard);
-    // newBoard.append(boardName);
-    saveBoard();
-
 }
 
 function addSwimLane(id, name) {
