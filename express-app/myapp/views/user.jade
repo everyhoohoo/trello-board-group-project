@@ -7,3 +7,8 @@ block content
       img(src=user.picture)
       p Welcome #{user.nickname}
       input(id="createBoard" type="button" value="Create New Board" style="border-radius: 4px; background-color: #212529; border-color: #212529; color: #CFCFCF;")
+
+block script
+  script.
+    var userid = "#{user.user_id}";
+  script(src='/javascripts/trello.js')

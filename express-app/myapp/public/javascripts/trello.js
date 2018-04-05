@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    renderEXBoards(userid);
 
     $('#createBoard').on('click', function () {
         var boardName = prompt('Name of new board');
@@ -7,12 +8,12 @@ $(document).ready(function() {
             return;
         }
         var id = getNewId();
-        addBoard(id, boardName);
-        // saveBoard({id: id, name: boardName});
+        addBoard(id, userid, boardName);
+        saveBoard({board_id: id, user_id: userid, name: boardName});
 
     });
 
-    renderEXSwimlanes();
+
 
     $('.w3-container').on('click', '.createSwimlane', function () {
         var slName = prompt('Name of new swimlane');
@@ -27,11 +28,27 @@ $(document).ready(function() {
 
 var newSLane;
 
-
-function renderEXSwimlanes() {
+function renderEXBoards(userID) {
     $.ajax({
             method: "GET",
-            url: "http://localhost:8080/swimlanes",
+            url: "http://localhost:8080/boards/"+ userID,
+
+        })
+        .done(function(boards) {
+            console.log(boards);
+
+            for (var i = 0; i < boards.length; i++) {
+                var board = boards[i];
+                addBoards(board.board_id, userid, board.name);
+                renderEXSwimlanes(board.board_id);
+            }
+    });
+}
+
+function renderEXSwimlanes(boardId) {
+    $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/boards/"+ boardId +"/swimlanes",
 
         })
         .done(function(swimlanes) {
@@ -39,7 +56,7 @@ function renderEXSwimlanes() {
 
             for (var i = 0; i < swimlanes.length; i++) {
                 var swimlane = swimlanes[i];
-                addSwimLane(swimlane.id, swimlane.name);
+                addSwimLane(swimlane.id, boardid, swimlane.name);
                 renderEXCards(swimlane.id);
             }
         });
@@ -68,13 +85,14 @@ function getNewId() {
   )
 }
 
-function addBoard (id, boardName) {
+function addBoard (id, userID, boardName) {
     let newBoard =
             '<div style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>' +
             '<div class="container" id="id"></div>';
     var boardName = $('<div class="boardName">' + boardName + '</div>');
     $('.w3-container').append(boardName, newBoard);
     // newBoard.append(boardName);
+    saveBoard();
 
 }
 
