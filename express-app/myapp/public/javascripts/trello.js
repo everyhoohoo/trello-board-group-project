@@ -168,7 +168,7 @@ function addCard(id, swimlaneID, title, description) {
 
     card.append(cardButtons);
 
-    var cardDescription = $('<div class :"description">' + description + '</div>')
+    var cardDescription = $('<div class="cardDescription">' + description + '</div>')
     card.append(cardDescription)
 
     cardButtons.on('click', '#titleEditBtn', function() {
