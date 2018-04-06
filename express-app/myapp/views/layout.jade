@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title= title
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(defer src='https://use.fontawesome.com/releases/v5.0.7/js/all.js')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/trello-style.css')
+    link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    script(src='https://cdn.auth0.com/js/auth0/8.7/auth0.min.js')
+    //script(src='/javascripts/trello.js')
+  body
+    .background-wallpaper 
+      .container-fluid
+        .row
+          .col-sm-8
+            p.home-heading AGILE SHARK BOARD
+            p.statement Organize your life
+          .col-sm-4
+        .row
+          .col-sm-8
+            a.button#btn-home-view.btn.btn-primary.btn-margin.home(href='/') Home
+            //- bubutton#btn-home-view.btn.btn-primary.btn-margin.hometton#btn-home-view.btn.btn-primary.btn-margin.home
+            //-   | Home
+            if loggedIn
+              a( id="qsProfileBtn" href='/user').w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Profile
+              a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
+            else
+              a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
+          .col-sm-4
+    
+
+    block content
+    
+  block script
+
+
+
