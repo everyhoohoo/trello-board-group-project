@@ -116,12 +116,12 @@ function getBoards(req, res, next){
   var userID = req.query.user_id;
   console.log("You are in getUsers " + userID);
   TrelloBoards.findAll({where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
-    if (users === undefined || users.length == 0){
-      res.send(404);
-    }
-    else {
+    // if (users === undefined || users.length == 0){
+    //   res.send(404);
+    // }
+    // else {
       res.send(boards);
-    }
+    // }
   });
 }
 
@@ -159,6 +159,7 @@ function postSwimLanes(req, res, next) {
 
   Columnlane.create({
     id: req.body.id,
+    board_id: req.body.board_id,
     name: req.body.name
   }).then((swimlanes) => {
     res.send(swimlanes);

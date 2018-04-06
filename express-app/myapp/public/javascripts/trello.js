@@ -1,6 +1,8 @@
 $(document).ready(function() {
     renderEXBoards(userid);
 
+    var boardIDSL;
+
     $('#createBoard').on('click', function () {
         var boardName = prompt('Name of new board');
         console.log(boardName);
@@ -11,6 +13,7 @@ $(document).ready(function() {
         addBoard(id, userid, boardName);
         saveBoard({board_id: id, user_id: userid, name: boardName});
 
+        boardIDSL = id;
     });
 
 
@@ -21,8 +24,8 @@ $(document).ready(function() {
             return;
         }
         var id = getNewId();
-        addSwimLane(id, slName);
-        saveSwimLane({id: id, name: slName});
+        addSwimLane(id, boardIDSL, slName);
+        saveSwimLane({id: id, board_id: boardIDSL, name: slName});
     });
 });
 
@@ -39,7 +42,7 @@ function renderEXBoards(userID) {
 
             for (var i = 0; i < boards.length; i++) {
                 var board = boards[i];
-                addBoards(board.board_id, userid, board.name);
+                addBoard(board.board_id, userid, board.name);
                 renderEXSwimlanes(board.board_id);
             }
     });
@@ -86,17 +89,14 @@ function getNewId() {
 }
 
 function addBoard (id, userID, boardName) {
-    let newBoard =
-            '<div style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>' +
-            '<div class="container" id="id"></div>';
-    var boardName = $('<div class="boardName">' + boardName + '</div>');
-    $('.w3-container').append(boardName, newBoard);
-    // newBoard.append(boardName);
-    saveBoard();
+    let newBoard = '<div style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>';
 
+    let container = $("<div>", { "class":"container", "id":id });
+    var boardName = $('<div class="boardName">' + boardName + '</div>');
+    $('.w3-container').append(boardName, newBoard, container);
 }
 
-function addSwimLane(id, name) {
+function addSwimLane(id, boardID, name) {
 
     newSLane = $("<div>", { "id": id, "class": "swimlane" });
 
@@ -139,7 +139,7 @@ function addSwimLane(id, name) {
         saveCard({ id: cardID, swimlane_id: id, title: txtTitle, description: txtDescription });
     });
 
-    $(".container").append(newSLane);
+    $("#"+ boardID).append(newSLane);
 };
 
 function addCard(id, swimlaneID, title, description) {
