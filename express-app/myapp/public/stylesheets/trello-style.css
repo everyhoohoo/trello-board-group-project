@@ -61,7 +61,7 @@
 }
 
 .boardName {
-    font-size: 75px;
+    font-size: 30px;
     text-align: center;
     padding:10px;
 }
@@ -192,10 +192,4 @@
     font-size: 1.5em;
     padding: 10px 20px;
     margin-left: 35px;
-}
-
-.cardDescription {
-    padding: 5px;
-    color: aliceblue;
-    font-size: 12px;
 }
