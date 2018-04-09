@@ -9,7 +9,6 @@ html
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src='https://cdn.auth0.com/js/auth0/8.7/auth0.min.js')
-    //script(src='/javascripts/trello.js')
   body
     .background-wallpaper 
       .container-fluid
@@ -21,8 +20,6 @@ html
         .row
           .col-sm-8
             a.button#btn-home-view.btn.btn-primary.btn-margin.home(href='/') Home
-            //- bubutton#btn-home-view.btn.btn-primary.btn-margin.hometton#btn-home-view.btn.btn-primary.btn-margin.home
-            //-   | Home
             if loggedIn
               a( id="qsProfileBtn" href='/user').w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Profile
               a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
