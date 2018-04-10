@@ -2,9 +2,7 @@ extends layout
 
 block content
     br
-    .w3-container
+    div
         .w3-card-4.w3-center(style="padding: 15px;")
             img(src=user.picture)
             p Welcome #{user.nickname}
-            input(id="createSwimlane" type="button" value="Add Swimlane" style="border-radius: 4px; background-color: #212529; border-color: #212529; color: #CFCFCF;")
-            div(class='container')

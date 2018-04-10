@@ -15,6 +15,7 @@ dotenv.load();
 
 const index = require('./routes/index');
 const user = require('./routes/user');
+const board = require('./routes/board');
 //const trello = require('./routes/trello');
 
 // This will configure Passport to use Auth0
@@ -88,6 +89,7 @@ app.use(function(req, res, next) {
 
 app.use('/', index);
 app.use('/user', user);
+app.use('/board', board);
 //app.use('/trello', trello);
 
 

@@ -1,8 +1,24 @@
 extends layout
 
 block content
-    .w3-container
-        if loggedIn
-            h4 You are logged in!
-        else
-            h4 You are not logged in! Please #[a(href="/login") Log In] to continue.
+    .home-background-wallpaper
+        .container-fluid
+            .row
+                .col-sm-8
+                    p.home-heading AGILE SHARK BOARD
+                    p.statement Organize your life
+                .col-sm-4
+                    .login
+                    if loggedIn
+                        h4 You are logged in!
+                    else
+                        h4 You are not logged in! Please #[a(href="/login") Log In] to continue.
+            .row
+                .col-sm-8
+                    a.button#btn-home-view.btn.btn-primary.btn-margin.home(href='/') Home
+                    if loggedIn
+                        a( id="qsProfileBtn" href='/user').w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Profile
+                        a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
+                    else
+                        a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
+                .col-sm-4
