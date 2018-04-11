@@ -27,6 +27,17 @@ $(document).ready(function() {
         addSwimLane(id, boardIDSL, slName);
         saveSwimLane({id: id, board_id: boardIDSL, name: slName});
     });
+
+    // $( "#" + swimlaneID ).sortable({
+    //   revert: true
+    // });
+    // $( ".card" ).draggable({
+    //   connectToSortable: "#" + swimlaneID,
+    //   helper: "clone",
+    //   revert: "invalid"
+    // });
+
+    // $( ".card" ).draggable();
 });
 
 var newSLane;
@@ -140,6 +151,10 @@ function addSwimLane(id, boardID, name) {
     });
 
     $("#"+ boardID).append(newSLane);
+    $( "#" + id ).sortable({
+      revert: true
+    }).droppable();
+
 };
 
 function addCard(id, swimlaneID, title, description) {
@@ -192,7 +207,14 @@ function addCard(id, swimlaneID, title, description) {
     });
 
     $("#" + swimlaneID).append(card);
+    $( ".card" ).draggable({
+      connectToSortable: "#" + swimlaneID,
+      helper: "clone",
+      revert: "invalid"
+    });
 };
+
+
 
 function saveBoard(board) {
     $.ajax({
