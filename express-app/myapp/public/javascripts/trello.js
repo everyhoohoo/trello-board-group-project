@@ -89,7 +89,7 @@ function getNewId() {
 }
 
 function addBoardCard (id, userID, boardName) {
-    let newBoardCard = $('<div class="boardName"><a href="/board">' + boardName + '</a></div>');
+    let newBoardCard = $('<center><div class="userboards"><a href="/board">' + boardName + '</a></div></center>');
     $('.w3-container').append(newBoardCard);
 }
 
