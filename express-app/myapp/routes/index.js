@@ -21,12 +21,16 @@ router.get('/login', passport.authenticate('auth0', {
   audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
   scope: 'openid profile'}),
   function(req, res) {
-    res.redirect("/board");
+    res.redirect("/user");
 });
 
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
+});
+
+router.get('/board', function(req, res) {
+  res.render('board');
 });
 
 router.get('/callback',
