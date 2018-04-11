@@ -1,24 +1,77 @@
 $(document).ready(function() {
-    renderEXSwimlanes();
+    renderEXBoards(userid);
 
-    $('#startBtn').on('click', function() {
+    var boardIDSL;
+
+    $('#createBoard').on('click', function () {
+        var boardName = prompt('Name of new board');
+        console.log(boardName);
+        if (boardName === null) {
+            return;
+        }
+        var id = getNewId();
+        addBoard(id, userid, boardName);
+        saveBoard({board_id: id, user_id: userid, name: boardName});
+
+        boardIDSL = id;
+    });
+
+
+
+    $('.w3-container').on('click', '.createSwimlane', function () {
         var slName = prompt('Name of new swimlane');
         if (slName === null) {
             return;
         }
         var id = getNewId();
-        addSwimLane(id, slName);
-        saveSwimLane({ id: id, name: slName });
+        addSwimLane(id, boardIDSL, slName);
+        saveSwimLane({id: id, board_id: boardIDSL, name: slName});
     });
-});
-var newSLane;
-var userID = user.user_id;
 
-function renderEXSwimlanes() {
+    // $( "#" + swimlaneID ).sortable({
+    //   revert: true
+    // });
+    // $( ".card" ).draggable({
+    //   connectToSortable: "#" + swimlaneID,
+    //   helper: "clone",
+    //   revert: "invalid"
+    // });
+
+    // $( ".card" ).draggable();
+});
+
+var newSLane;
+<<<<<<< HEAD
+var userID = user.user_id;
+=======
+
+function renderEXBoards(userID) {
     $.ajax({
             method: "GET",
+            url: "http://localhost:8080/boards/"+ userID,
+
+        })
+        .done(function(boards) {
+            console.log(boards);
+>>>>>>> e9fc68b896a76f11ee2a72ff9e92d59a2c912e18
+
+            for (var i = 0; i < boards.length; i++) {
+                var board = boards[i];
+                addBoard(board.board_id, userid, board.name);
+                renderEXSwimlanes(board.board_id);
+            }
+    });
+}
+
+function renderEXSwimlanes(boardId) {
+    $.ajax({
+            method: "GET",
+<<<<<<< HEAD
             url: "http://localhost:8080/swimlanes",
             data: {user_id: userID},
+=======
+            url: "http://localhost:8080/boards/"+ boardId +"/swimlanes",
+>>>>>>> e9fc68b896a76f11ee2a72ff9e92d59a2c912e18
 
         })
         .done(function(swimlanes) {
@@ -26,7 +79,7 @@ function renderEXSwimlanes() {
 
             for (var i = 0; i < swimlanes.length; i++) {
                 var swimlane = swimlanes[i];
-                addSwimLane(swimlane.id, swimlane.name);
+                addSwimLane(swimlane.id, boardid, swimlane.name);
                 renderEXCards(swimlane.id);
             }
         });
@@ -55,12 +108,19 @@ function getNewId() {
   )
 }
 
+function addBoard (id, userID, boardName) {
+    let newBoard = '<div style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>';
 
-function addSwimLane(id, name) {
+    let container = $("<div>", { "class":"container", "id":id });
+    var boardName = $('<div class="boardName">' + boardName + '</div>');
+    $('.w3-container').append(boardName, newBoard, container);
+}
+
+function addSwimLane(id, boardID, name) {
 
     newSLane = $("<div>", { "id": id, "class": "swimlane" });
 
-    var slName = $('<div class :"swimelaneName">' + name + '</div>');
+    var slName = $('<div class="swimelaneName">' + name + '</div>');
     newSLane.append(slName);
 
     var laneButtons = $('<span class = "buttons"><input class= "addCardBtn" type="button" value="Add Card" click=""></input><i class="fas fa-pencil-alt icons"></i><input class="delBtn" type="button" value="X" click=""></input></span>');
@@ -99,13 +159,17 @@ function addSwimLane(id, name) {
         saveCard({ id: cardID, swimlane_id: id, title: txtTitle, description: txtDescription });
     });
 
-    $(".container").append(newSLane);
+    $("#"+ boardID).append(newSLane);
+    $( "#" + id ).sortable({
+      revert: true
+    }).droppable();
+
 };
 
 function addCard(id, swimlaneID, title, description) {
 
     var card = $("<div>", { "class": "card", "id": id});
-    var cardName = $('<div class :"cardName">' + title + '</div>');
+    var cardName = $('<div class="cardName">' + title + '</div>');
 
     card.append(cardName);
 
@@ -152,7 +216,25 @@ function addCard(id, swimlaneID, title, description) {
     });
 
     $("#" + swimlaneID).append(card);
+    $( ".card" ).draggable({
+      connectToSortable: "#" + swimlaneID,
+      helper: "clone",
+      revert: "invalid"
+    });
 };
+
+
+
+function saveBoard(board) {
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/boards",
+        data: board
+    })
+        .done(function(board){
+            alert("Saved Board: " + board);
+        })
+}
 
 function saveSwimLane(swimlane) {
     $.ajax({
