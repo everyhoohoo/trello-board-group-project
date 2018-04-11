@@ -91,6 +91,14 @@
     margin-top: 10px;
 }
 
+ /*#draggable { 
+    width: 150px; 
+    height: 150px;
+    padding: 0.5em;
+    
+    background:#eee;
+}
+*/
 .card-buttons {
     display: flex;
     justify-content: space-between;
@@ -199,3 +207,5 @@
     color: aliceblue;
     font-size: 12px;
 }
+
+        

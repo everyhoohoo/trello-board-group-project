@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     renderEXBoards(userid);
 
@@ -13,6 +14,31 @@ $(document).ready(function() {
 
     });
 
+// $(document).ready(function() {
+//     $('.card').draggable({
+//         helper: 'clone'
+//     });
+
+//     $('#swimlane').droppable({
+//         accept: '.card',
+//         drop: function(event,ui){
+
+//             var droppedCard = $(ui.draggable);
+//             $(this).append(droppedCard);
+//         }
+//     });
+//     });
+
+
+
+
+// $(document).ready(function(){
+//     $('.container').draggable();
+
+// });
+
+
+
 
 
     $('.w3-container').on('click', '.createSwimlane', function () {
@@ -25,6 +51,22 @@ $(document).ready(function() {
         saveSwimLane({id: id, name: slName});
     });
 });
+
+// $(document).ready(function() {
+//     $('.card').draggable({
+//         helper: 'clone'
+//     });
+
+//     $('#swimlane').droppable({
+//         accept: '.card',
+//         drop: function(event,ui){
+
+//             var droppedCard = $(ui.draggable);
+//             $(this).append(droppedCard);
+//         }
+//     });
+//     });
+  
 
 var newSLane;
 
@@ -137,7 +179,24 @@ function addSwimLane(id, name) {
     });
 
     $(".container").append(newSLane);
-};
+    return newSLane;
+
+    // $('.swimlane').draggable({
+    //     helper: 'clone'
+    // });
+
+    // $('.swimlane').droppable({
+    //     accept: '.swimlane',
+    //     drop: function(event,ui){
+
+    //         var droppedCard = $(ui.draggable);
+    //         $(this).append(droppedCard);
+    //     }
+    // });
+
+    };
+
+
 
 function addCard(id, swimlaneID, title, description) {
 
@@ -189,6 +248,40 @@ function addCard(id, swimlaneID, title, description) {
     });
 
     $("#" + swimlaneID).append(card);
+    return card;
+
+
+
+    // $('.card').draggable({
+    //     helper: 'clone',
+    //     revert: 'invalid'
+    // });
+
+    // $('.swimlane').droppable({
+    //     accept: '.card',
+    //     drop: function(event,ui){
+
+    //         var droppedCard = $(ui.draggable);
+    //         $(this).append(droppedCard);
+    //     }
+    // });
+
+    // $('.swimlane').draggable({
+    //     helper: 'clone',
+    //     revert: 'invalid',
+    //     drag: handleDrag
+    // });
+
+    // $('.swimlane').droppable({
+    //     accept: '.card',
+    //     hoverClass: 'hovered',
+    //     drop: function(event,ui){
+    //         var droppedCard = $(ui.draggable);
+    //         $(this).append(droppedCard);
+    //     }
+    // });
+
+
 };
 
 function saveBoard(board) {
@@ -275,3 +368,113 @@ function deleteCard(cID) {
         });
 
 }
+
+ var cardName = $('<div class="cardName">' + title + '</div>');
+$(document).ready(function() {
+
+    $('.card').draggable({
+        helper: 'clone',
+        revert: 'invalid'
+    });
+});
+
+
+
+//  function drawCard(id, name) {
+//    // newCard = $('<div id="' + id +'" class="card"></div>');
+//    newCard = $('<div id= "draggable" class = "card">')
+
+//    newCard.draggable();
+//    ({
+//        // start: function() {
+//        //     $(this).css(".card");
+//         // helper: 'clone'
+
+//        // }
+//    });
+
+//    newCard.droppable({
+//        drop: function(event, ui) {
+//            var otherCard = ui.draggable;
+//            var thisCard = $(this);
+
+//            otherCard.detach();
+//            otherCard.insertAfter(thisCard);
+//            otherCard.css(".card");
+
+//            // $.ajax({
+//            //  method: "POST",
+//            //  url: "http://localhost:8080/swimlanes/cards/",
+//            //  data: card
+//            // })
+
+//        }
+//    });
+//  //   }
+
+
+//  $(document).ready(function(){
+
+//     $(".card").draggable({containment: 'document', revert:true, start:function(){
+//         contents = $(this).card
+//     }
+// })
+
+//     $(".swimlane").droppable();
+
+//  });
+
+
+// $(function (){
+//     $("card").draggable({
+//         helper: "clone",
+//         revert: "invalid",
+//         cursor: "move"
+//     });
+
+//     $("newsLane").droppable({
+//         accept: "card",
+//       drop: function(event,ui){
+//             var droppedCard = $(ui.draggable);
+//             $(this).append(droppedCard);
+//     }
+// });
+// });
+
+
+
+// $('.card').draggable({
+//         helper: 'clone',
+//         revert: 'invalid',
+//         drag: handleDrag
+//     });
+
+//     $('.swimlane').droppable({
+//         accept: '.card',
+//         hoverClass: 'hovered',
+//         drop: handleCardDrop
+        // drop: function(event,ui){
+        //     var droppedCard = $(ui.draggable);
+        //     $(this).append(droppedCard);
+        // // }
+    // });
+
+// function drawSwimlane(id, name) {
+//    newCard = $('<div id="' + id +'" class="card"></div>');
+//    newSwimlane = $('<div id="' + id +'" class="swimlane"></div>');
+
+//    newCard.draggable({
+//        helper: 'clone',
+//        revert: 'invalid'
+//    });
+//    newSwimlane.droppable({
+//        drop: function(event, ui) {
+//            accept: 'newCard',
+//            var otherSwimlane = ui.draggable;
+//            var thisSwimlane = $(this);
+
+//            otherSwimlane.detach();
+//            otherSwimlane.insertAfter(thisSwimlane);
+//        }
+//    });
+// }

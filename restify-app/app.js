@@ -8,7 +8,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 // setup the mysql configuration
-const sql = new Sequelize('trello', 'root', 'P@tches1238', {
+const sql = new Sequelize('trello', 'root', 'RZZMRC84S09G224A', {
   host: 'localhost',
   port: 3306,
   dialect: 'mysql',
@@ -31,13 +31,13 @@ sql
   });
 
 var UserProfile = sql.define('user', {
-  user_id:{ type: Sequelize.STRING, primaryKey: true,},
+  user_id:{ type: Sequelize.STRING, primaryKey: true}
 });
 
 var TrelloBoards = sql.define('board', {
   board_id:{ type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
-  user_id:{ type: Sequelize.STRING,},
-  name:{ type: Sequelize.STRING,}
+  user_id:{ type: Sequelize.STRING},
+  name:{ type: Sequelize.STRING}
 });
 
 //Columnlane is the same as a swimlane

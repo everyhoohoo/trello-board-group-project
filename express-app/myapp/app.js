@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
-const Auth0Strategy = require('passport-auth0');
+var Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash');
+var RedisStore = require("connect-redis")(session);
 
 dotenv.load();
 
@@ -53,11 +54,21 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+var sessionStore = new RedisStore({host:"localhost"});
+
 app.use(
   session({
     secret: 'shhhhhhhhh',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    // store: sessionStore,
+    // cookie: {
+    //   maxAge: 14*24*60*60*1000
+      // httpOnly: true,
+      // secure: true
+
+    // }
   })
 );
 app.use(passport.initialize());
