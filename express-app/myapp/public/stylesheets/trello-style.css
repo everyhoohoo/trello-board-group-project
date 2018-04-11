@@ -61,9 +61,9 @@
 }
 
 .boardName {
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
-    padding:10px;
+    padding:30px 10px;
 }
 
 .swimelaneName {
@@ -121,6 +121,18 @@
     font-size: 15px;
     text-align: center;
     cursor: default;
+}
+
+.userboards {
+    width: 50%;
+    background-color: lightseagreen;
+    border: solid 3px cornflowerblue;
+    color: white;
+    padding: 20px 0px;
+    text-align: center;
+    margin: 4px 2px;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 .createSwimlane {
