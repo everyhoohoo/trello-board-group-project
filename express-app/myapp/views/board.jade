@@ -25,5 +25,9 @@ block content
                             a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
                     .col-sm-4
         .w3-card-4.w3-center(style="padding: 15px;")
-            input.createSwimlane(type='button', value='Add Swimlane', click='')
+            input(class='createSwimlane' type='button', value='Add Swimlane', click='')
         .container
+block script
+  script.
+     var boardID = "#{board_id}";
+  script(src='/javascripts/trello.js')

@@ -1,31 +1,14 @@
 $(document).ready(function() {
-    renderEXBoards(userid);
+    renderEXSwimlanes(boardID);
 
-    var boardIDSL;
-
-    $('#createBoard').on('click', function () {
-        var boardName = prompt('Name of new board');
-        console.log(boardName);
-        if (boardName === null) {
-            return;
-        }
-        var id = getNewId();
-        addBoardCard(id, userid, boardName);
-        saveBoard({board_id: id, user_id: userid, name: boardName});
-
-        boardIDSL = id;
-    });
-
-
-
-    $('.w3-container').on('click', '.createSwimlane', function () {
+    $('.createSwimlane').on('click', function () {
         var slName = prompt('Name of new swimlane');
         if (slName === null) {
             return;
         }
         var id = getNewId();
-        addSwimLane(id, boardIDSL, slName);
-        saveSwimLane({id: id, board_id: boardIDSL, name: slName});
+        addSwimLane(id, boardID, slName);
+        saveSwimLane({id: id, board_id: boardID, name: slName});
     });
 
     // $( "#" + swimlaneID ).sortable({
@@ -42,23 +25,6 @@ $(document).ready(function() {
 
 var newSLane;
 
-function renderEXBoards(userID) {
-    $.ajax({
-            method: "GET",
-            url: "http://localhost:8080/boards/"+ userID,
-
-        })
-        .done(function(boards) {
-            console.log(boards);
-
-            for (var i = 0; i < boards.length; i++) {
-                var board = boards[i];
-                addBoard(board.board_id, userid, board.name);
-                renderEXSwimlanes(board.board_id);
-            }
-    });
-}
-
 function renderEXSwimlanes(boardId) {
     $.ajax({
             method: "GET",
@@ -70,7 +36,7 @@ function renderEXSwimlanes(boardId) {
 
             for (var i = 0; i < swimlanes.length; i++) {
                 var swimlane = swimlanes[i];
-                addSwimLane(swimlane.id, boardid, swimlane.name);
+                addSwimLane(swimlane.id, boardId, swimlane.name);
                 renderEXCards(swimlane.id);
             }
         });
@@ -97,19 +63,6 @@ function getNewId() {
     return id = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   )
-}
-
-function addBoardCard (id, userID, boardName) {
-    let newBoardCard = $('<center><div class="userboards"><a href="/board">' + boardName + '</a></div></center>');
-    $('.w3-container').append(newBoardCard);
-}
-
-function addBoard (id, userID, boardName) {
-    let newBoard = '< style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></>';
-
-    let container = $("<div>", { "class":"container", "id":id });
-    var boardName = $('<div class="boardName">' + boardName + '</div>');
-    $('.w3-container').append(boardName, newBoard, container);
 }
 
 function addSwimLane(id, boardID, name) {
@@ -155,10 +108,8 @@ function addSwimLane(id, boardID, name) {
         saveCard({ id: cardID, swimlane_id: id, title: txtTitle, description: txtDescription });
     });
 
-    $("#"+ boardID).append(newSLane);
-    $( "#" + id ).sortable({
-      revert: true
-    }).droppable();
+    $('.container').append(newSLane);
+    // $( "#" + id ).droppable();
 
 };
 
@@ -212,11 +163,11 @@ function addCard(id, swimlaneID, title, description) {
     });
 
     $("#" + swimlaneID).append(card);
-    $( ".card" ).draggable({
-      connectToSortable: "#" + swimlaneID,
-      helper: "clone",
-      revert: "invalid"
-    });
+    // $( ".card" ).draggable({
+    //   connectToSortable: "#" + swimlaneID,
+    //   helper: "clone",
+    //   revert: "invalid"
+    // });
 };
 
 

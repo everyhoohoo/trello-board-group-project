@@ -29,9 +29,9 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-router.get('/board', function(req, res) {
-  res.render('board');
-});
+// router.get('/board', function(req, res) {
+//   res.redirect('/user');
+// });
 
 router.get('/callback',
   passport.authenticate('auth0', {
