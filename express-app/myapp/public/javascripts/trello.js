@@ -10,7 +10,7 @@ $(document).ready(function() {
             return;
         }
         var id = getNewId();
-        addBoard(id, userid, boardName);
+        addBoardCard(id, userid, boardName);
         saveBoard({board_id: id, user_id: userid, name: boardName});
 
         boardIDSL = id;
@@ -99,8 +99,13 @@ function getNewId() {
   )
 }
 
+function addBoardCard (id, userID, boardName) {
+    let newBoardCard = $('<center><div class="userboards"><a href="/board">' + boardName + '</a></div></center>');
+    $('.w3-container').append(newBoardCard);
+}
+
 function addBoard (id, userID, boardName) {
-    let newBoard = '<div style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></div>';
+    let newBoard = '< style="text-align:center"><input class= "createSwimlane" type="button" value="Add Swimlane" click=""></input></>';
 
     let container = $("<div>", { "class":"container", "id":id });
     var boardName = $('<div class="boardName">' + boardName + '</div>');
