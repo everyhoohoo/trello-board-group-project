@@ -10,17 +10,6 @@ $(document).ready(function() {
         addSwimLane(id, boardID, slName);
         saveSwimLane({id: id, board_id: boardID, name: slName});
     });
-
-    // $( "#" + swimlaneID ).sortable({
-    //   revert: true
-    // });
-    // $( ".card" ).draggable({
-    //   connectToSortable: "#" + swimlaneID,
-    //   helper: "clone",
-    //   revert: "invalid"
-    // });
-
-    // $( ".card" ).draggable();
 });
 
 var newSLane;
@@ -109,8 +98,20 @@ function addSwimLane(id, boardID, name) {
     });
 
     $('.container').append(newSLane);
-    // $( "#" + id ).droppable();
+    $('.swimlane').draggable({
+        connectToSortable: '.container',
+    });
 
+    $('.container').droppable({
+        accept: '.swimlane',
+        drop: function(event,ui){
+
+            var droppedSwimlane = $(ui.draggable);
+            $(this).append(droppedSwimlane);
+        }
+    }).sortable({
+      revert: true
+    });
 };
 
 function addCard(id, swimlaneID, title, description) {
@@ -159,7 +160,7 @@ function addCard(id, swimlaneID, title, description) {
             return;
         }
         cardDescription.text(newDescription);
-        updateCard(id,title, newDescription);
+        updateCard(id, title, newDescription);
     });
 
     $("#" + swimlaneID).append(card);
@@ -168,6 +169,26 @@ function addCard(id, swimlaneID, title, description) {
     //   helper: "clone",
     //   revert: "invalid"
     // });
+
+    $('.card').draggable({
+        connectToSortable: '.swimlane',
+    });
+
+$(".swimlane")
+    .droppable({
+        accept: ".card",
+        hoverClass: "hovered",
+        drop: function(event, ui) {
+            var droppedCard = $(ui.draggable);
+            $(this).append(droppedCard);
+            console.log(this.id);
+            var newSwimLID = this.id;
+            updateCardSW(id, newSwimLID);
+        }
+    })
+    .sortable({
+        revert: true
+    });
 };
 
 
@@ -219,8 +240,19 @@ function saveCard(card) {
 function updateCard(id, txtTitle, txtDescription) {
     $.ajax({
             method: "POST",
-            url: "http://localhost:8080/swimlanes/cards/" + id,
+            url: "http://localhost:8080/cards/" + id,
             data: { title: txtTitle, description: txtDescription }
+        })
+        .done(function(card) {
+            alert("Card Updated: " + card);
+        });
+}
+
+function updateCardSW(id, swimlaneID) {
+    $.ajax({
+            method: "POST",
+            url: "http://localhost:8080/swimlanes/cards/" + id,
+            data: { swimlane_id: swimlaneID}
         })
         .done(function(card) {
             alert("Card Updated: " + card);

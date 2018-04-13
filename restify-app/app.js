@@ -279,7 +279,20 @@ function updateCardByCardId(req, res, next){
   var name = req.body.title;
   var des = req.body.description;
   
-  RowCells.update({title: name, description: des}, {where: { id: cardID}})
+  RowCells.update({ title: name, description: des}, {where: { id: cardID}})
+    .then((cards)=>{
+      res.send(cards);
+    });
+}
+
+function updateCardSWByCardId(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+  var cardID = req.params.cardId;
+  var swimlaneID = req.body.swimlane_id;
+  
+  RowCells.update({ swimlane_id: swimlaneID}, {where: { id: cardID}})
     .then((cards)=>{
       res.send(cards);
     });
@@ -322,7 +335,7 @@ server.get('/users', getUsers);
 server.get('/boards', getBoards);
 server.get('/swimlanes', getSwimLanes);
 server.get('/boards/:user_id', getBoardsByUserId);
-server.get('/boards/:board_id', getSwimlanesByBoardId)
+server.get('/boards/:board_id/swimlanes', getSwimlanesByBoardId)
 server.get('/swimlanes/:swimlane_id/cards', getCardsBySwimlaneId);
 server.get('/cards', getCards);
 
@@ -331,7 +344,8 @@ server.post('/boards', postBoards);
 server.post('/swimlanes', postSwimLanes);
 server.post('/swimlanes/:swimlane_id', updateSwimlaneBySwimlaneId);
 server.post('/cards', postCards);
-server.post('/swimlanes/cards/:cardId', updateCardByCardId);
+server.post('/cards/:cardId', updateCardByCardId);
+server.post('swimlanes/cards/:cardId', updateCardSWByCardId);
 
 server.del('/swimlanes/:id', deleteSwimlane);
 server.opts('/swimlanes/:id', function(req, res, next) {

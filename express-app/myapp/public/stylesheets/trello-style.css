@@ -57,6 +57,7 @@
     border: solid 1px #222222;
     background-color: #547570;
     flex-basis: 200px;
+    margin: 5px;
     /*    overflow-y: auto;*/
 }
 
@@ -84,7 +85,7 @@
 }
 
 .card {
-    width: 100%;
+    width: 200px;
     height: 200px;
     border: solid 1px #000000;
     background-color: #00a58c;
