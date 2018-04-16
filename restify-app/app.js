@@ -298,6 +298,26 @@ function updateCardSWByCardId(req, res, next){
     });
 }
 
+function getTrelloByUserBoard(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+  var userID = req.query.user_id;
+  console.log('This is the userID '+ userID);
+  var boardID = req.query.board_id;
+  console.log('This is the boardID '+ boardID);
+
+    TrelloBoards.findAll({where: {user_id: userID, board_id: boardID}, order: [['createdAt', 'ASC']]}).then((boards) => {
+    if (boards === undefined || boards.length == 0){
+      res.send(404);
+    }
+    else {
+      res.send(boards);
+    }
+  });
+
+}
+
 function deleteSwimlane(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -338,6 +358,7 @@ server.get('/boards/:user_id', getBoardsByUserId);
 server.get('/boards/:board_id/swimlanes', getSwimlanesByBoardId)
 server.get('/swimlanes/:swimlane_id/cards', getCardsBySwimlaneId);
 server.get('/cards', getCards);
+server.get('/users/boards', getTrelloByUserBoard);
 
 server.post('/users', postUsers);
 server.post('/boards', postBoards);
