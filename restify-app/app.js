@@ -263,7 +263,7 @@ function updateSwimlaneBySwimlaneId(req, res, next){
 
   var newName = req.body.name;
 
-  Columnlane.update({ name: newName }, { where: { swimlane_id: swimlaneid }})
+  Columnlane.update({ name: newName }, { where: { id: swimlaneid }})
     .then((swimlanes)=>{
       res.send(swimlanes);
     });
@@ -366,7 +366,14 @@ server.post('/swimlanes', postSwimLanes);
 server.post('/swimlanes/:swimlane_id', updateSwimlaneBySwimlaneId);
 server.post('/cards', postCards);
 server.post('/cards/:cardId', updateCardByCardId);
-server.post('swimlanes/cards/:cardId', updateCardSWByCardId);
+server.post('/swimlanes/cards/:cardId', updateCardSWByCardId);
+server.opts('/swimlanes/cards/:cardId', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
 
 server.del('/swimlanes/:id', deleteSwimlane);
 server.opts('/swimlanes/:id', function(req, res, next) {

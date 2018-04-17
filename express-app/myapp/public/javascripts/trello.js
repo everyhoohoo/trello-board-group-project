@@ -164,11 +164,6 @@ function addCard(id, swimlaneID, title, description) {
     });
 
     $("#" + swimlaneID).append(card);
-    // $( ".card" ).draggable({
-    //   connectToSortable: "#" + swimlaneID,
-    //   helper: "clone",
-    //   revert: "invalid"
-    // });
 
     $('.card').draggable({
         connectToSortable: '.swimlane',
@@ -178,20 +173,21 @@ $(".swimlane")
     .droppable({
         accept: ".card",
         hoverClass: "hovered",
-        drop: function(event, ui) {
+    })
+    .sortable({
+        revert: true,
+        items: 'sort:not(.buttons)',
+        receive: function(event, ui){
             var droppedCard = $(ui.draggable);
             $(this).append(droppedCard);
             console.log(this.id);
             var newSwimLID = this.id;
-            updateCardSW(id, newSwimLID);
+            var dropCardID = $(ui.item).attr('id');
+            updateCardSW(dropCardID, newSwimLID);
         }
-    })
-    .sortable({
-        revert: true
+
     });
 };
-
-
 
 function saveBoard(board) {
     $.ajax({
