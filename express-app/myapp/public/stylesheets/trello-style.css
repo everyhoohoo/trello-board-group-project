@@ -55,6 +55,10 @@
 
 }
 
+.checkout {
+    margin-top: 100px;
+}
+
 .swimlane {
     width: 200px;
     border: solid 1px #222222;
