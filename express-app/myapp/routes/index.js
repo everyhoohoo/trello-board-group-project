@@ -21,8 +21,9 @@ router.get('/login', passport.authenticate('auth0', {
   audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
   scope: 'openid profile'}),
   function(req, res) {
-    res.redirect("/user");
+    res.redirect("/charge");
 });
+
 
 router.get('/logout', function(req, res) {
   req.logout();

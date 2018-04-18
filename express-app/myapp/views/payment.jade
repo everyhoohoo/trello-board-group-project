@@ -1,0 +1,30 @@
+extends layout
+
+block content
+
+ extends layout
+
+block content
+	.col-md-8.col-md-offset-2
+		h1 Payment Details 
+		
+		form(action="/charge" method="POST")
+			div.form-group
+				label(for="name") Name on card:
+				input(type="text" class="form-control" id="name" placeholder="Marco Razzano")
+
+			div.form-group
+				label(for="cn") Card Number:
+				input.form-control(id="cn" placeholder="4242 4242 4242 4242")
+
+			div.form-group
+				label(for="expire") Expiration:
+				.expire
+					input.form-control(id="expire" placeholder="MM")
+					input.form-control(id="expire" placeholder="YYYY")
+
+			div.form-group
+				label(for="cvc") CVC:
+				input.form-control(id="cvc" placeholder="123")
+
+			button.btn.btn-success(type="submit") Submit Payment
