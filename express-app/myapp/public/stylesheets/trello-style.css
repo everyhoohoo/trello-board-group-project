@@ -56,7 +56,23 @@
 }
 
 .checkout {
+    margin-top: 75px;
+    text-align: center;
+}
+
+.checkout-title {
+    font-size: 75px;
+    color: black;
+    text-align: center;
     margin-top: 100px;
+    text-shadow: 2px 2px 8px #FF0000;
+}
+
+.checkout-description {
+    font-size: 30px;
+    color: black;
+    text-align: center;
+    text-shadow: 2px 2px 8px #FF0000;
 }
 
 .swimlane {
@@ -162,6 +178,7 @@
     text-align: center;
 }
 
+
 .content {
     display: none;
 }
@@ -176,6 +193,13 @@
 
 .home-background-wallpaper {
     background-image: url("shark.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.checkout-wallpaper {
+    background-image: url("shark-bait.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;

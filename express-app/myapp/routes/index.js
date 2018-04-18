@@ -29,6 +29,10 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+router.get('/checkout', function(req, res, next) {
+    res.render('checkout');
+});
+
 // router.get('/board', function(req, res) {
 //   res.redirect('/user');
 // });
