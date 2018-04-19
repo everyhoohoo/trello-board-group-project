@@ -21,7 +21,7 @@ router.get('/login', passport.authenticate('auth0', {
   audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
   scope: 'openid profile'}),
   function(req, res) {
-    res.redirect("/user");
+    res.redirect("/checkout");
 });
 
 router.get('/logout', function(req, res) {
@@ -32,10 +32,6 @@ router.get('/logout', function(req, res) {
 router.get('/checkout', function(req, res, next) {
     res.render('checkout');
 });
-
-// router.get('/board', function(req, res) {
-//   res.redirect('/user');
-// });
 
 router.get('/callback',
   passport.authenticate('auth0', {
