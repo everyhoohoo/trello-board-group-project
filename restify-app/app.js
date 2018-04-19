@@ -57,7 +57,7 @@ var RowCells = sql.define('card', {
 
 UserProfile.hasMany(TrelloBoards, {foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 TrelloBoards.hasMany(Columnlane, {foreignKey: 'board_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
-Columnlane.hasMany(RowCells, {foreignKey: 'swimlanes', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Columnlane.hasMany(RowCells, {foreignKey: 'swimlane_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 sql.sync();
 
@@ -315,19 +315,24 @@ function getTrelloByUserBoard(req, res, next){
       res.send(boards);
     }
   });
+}
 
+function updateBoardName(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  var boardID = req.params.id;
+  var boardName = req.body.name;
+  
+  TrelloBoards.update({ name: boardName}, {where: { board_id: boardID}})
+    .then((boards)=>{
+      res.send(boards);
+    });
 }
 
 function deleteSwimlane(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   var delSwimlane = req.params.id;
-
-  RowCells.destroy({
-    where: {swimlane_id: delSwimlane}
-  }).then(()=>{
-    res.send();
-  });
 
   Columnlane.destroy({
     where: {id: delSwimlane}
@@ -347,6 +352,25 @@ function deleteCard(req, res, next){
   }).then(()=>{
     res.send();
   });
+  
+}
+
+function deleteBoard(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  var delBoard = req.params.id;
+
+  TrelloBoards.destroy({
+    where: {board_id: delBoard}
+  }).then(()=>{
+    res.send();
+  });
+
+  // Columnlane.destroy({
+  //   where: {id: delSwimlane}
+  // }).then(()=>{
+  //   res.send();
+  // });
   
 }
 
@@ -374,6 +398,14 @@ server.opts('/swimlanes/cards/:cardId', function(req, res, next) {
     res.send(204);
     return next();
 });
+server.post('/boards/:id', updateBoardName);
+server.opts('/boards/:id', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
 
 server.del('/swimlanes/:id', deleteSwimlane);
 server.opts('/swimlanes/:id', function(req, res, next) {
@@ -394,6 +426,15 @@ server.opts('/swimlanes/:swimlane_id/cards', function(req, res, next) {
 
 server.del('/cards/:id', deleteCard);
 server.opts('/cards/:id', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
+
+server.del('/boards/:id', deleteBoard);
+server.opts('/boards/:id', function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");

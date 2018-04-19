@@ -258,13 +258,6 @@ function updateCardSW(id, swimlaneID) {
 function deleteSwimlane(slID){
         $.ajax({
             method: "DELETE",
-            url: 'http://localhost:8080/swimlanes/'+ slID +'/cards/',
-        })
-        .done(function(swimlanes) {
-            alert("Any Cards In Swimlane " + slID + " Were Deleted.");
-        });
-                $.ajax({
-            method: "DELETE",
             url: 'http://localhost:8080/swimlanes/' + slID,
         })
         .done(function(swimlanes) {

@@ -52,7 +52,27 @@ function addBoardCard (id, userID, boardName) {
 
     var boardName = $("<a href='"+boardUrl+"'>"+ boardName +"</a>");
 
-	$(newBoardCard).append(boardName)
+    var boardButtons = $('<span class = "buttons"><i class="fas fa-pencil-alt icons"></i><input class="delBtn" type="button" value="X" click=""></input></span>');
+    
+    newBoardCard.append(boardButtons);
+    newBoardCard.append(boardName);
+
+    boardButtons.on('click', '.fa-pencil-alt', function() {
+        var newName = prompt('Rename Board');
+        if (newName === null) {
+            return;
+        }
+        boardName.text(newName);
+        updateBoard(id, newName);
+    });
+
+    boardButtons.on('click', '.delBtn', function() {
+        var rm = $(this).closest('.userboards').attr('id');
+        console.log(rm);
+        $(this).closest('.userboards').remove();
+        deleteBoard(rm);
+
+    });
 
     $('.w3-container').append(newBoardCard);
 }
@@ -66,4 +86,25 @@ function saveBoard(board) {
         .done(function(board){
             alert("Saved Board: " + board);
         })
+}
+
+function updateBoard(boardID, boardName) {
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/boards/" + boardID,
+        data:  { name: boardName }
+    })
+    .done(function(board) {
+        alert("Board Updated: " + board);
+    });
+}
+
+function deleteBoard(boardID) {
+        $.ajax({
+            method: "DELETE",
+            url: 'http://localhost:8080/boards/' + boardID,
+        })
+        .done(function(boards) {
+            alert("All Board data, Swimlanes and Cards, were deleted.");
+        });
 }
