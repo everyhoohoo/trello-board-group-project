@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    .background-wallpaper
+        .container-fluid
+            .row
+                .col-sm-8
+                    p.home-heading AGILE SHARK BOARD
+                    p.statement Organize your life
+                .col-sm-3
+                    .login
+                    if loggedIn
+                        h4 You are logged in!
+                    else
+                        h4 You are not logged in! Please #[a(href="/login") Log In] to continue.
+                col-sm-1
+
+
+            .row
+                .col-sm-8
+                    a.button#btn-home-view.btn.btn-primary.btn-margin.home(href='/') Home
+                    if loggedIn
+                        a( id="qsProfileBtn" href='/user').w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Profile
+                        a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
+                    else
+                        a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
+                .col-sm-4
+    .container-fluid.checkout-wallpaper
+        .row
+            .col.align-self-center
+                p.checkout-title Don't want to be SHARK bait??
+                p.checkout-description (Save your life and subscribe to access your boards)
+
+        .row
+            .col.align-self-center
+                form.checkout(action='./user', method='POST')
+                    script.stripe-button(src='https://checkout.stripe.com/checkout.js', data-key='pk_test_6pRNASCoBOKtIshFeQd4XMUh', data-amount='999', data-name='Stripe.com', data-description='Example charge', data-image='https://stripe.com/img/documentation/checkout/marketplace.png', data-locale='auto', data-zip-code='true')
