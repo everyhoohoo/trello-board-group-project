@@ -16,12 +16,12 @@ block content
         .col-sm-1
           .row
         .col-sm-8
-          a.button#btn-home-view.btn.btn-primary.btn-margin.home(href='/') Home
-          if loggedIn
-            a( id="qsProfileBtn" href='/user').w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Profile
-            a( id="qsLogoutBtn" href="/logout").w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Logout
-          else
-            a( id="qsLoginBtn" href="/login" ).w3-bar-item.w3-button.btn.btn-primary.btn-margin.home Login
+          a.button#btn-home-view.btn.btn-primary(href='/') Home
+            if loggedIn
+              a( id="qsProfileBtn" href='/user').btn.btn-primary Profile
+              a( id="qsLogoutBtn" href="/logout").btn.btn-primary Logout
+            else
+              a( id="qsLoginBtn" href="/login" ).btn.btn-primary Login
         .col-sm-4
   br
   .w3-container
