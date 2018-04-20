@@ -27,54 +27,10 @@ router.get('/login', passport.authenticate('auth0', {
     res.redirect("/checkout");
 });
 
-// router.post("/charge", ensureLoggedIn, function(req, res) {
-//     var customerId = req.user.app_metadata.stripe_customer_id;
-//     //var customerId = req.context.idToken;
-//     // router.post("/charge", (req, res) => {
-//     //     let amount = 999;
-//     // });
-//     var userPaid;
-//     let amount = 999;
-//     stripe.charges
-//         .create({
-//             amount,
-//             description: "sample charge",
-//             currency: "usd",
-//             customer: customerId,
-//             source: req.body.stripeToken
-//         })
-//         .then(charge => 
-//             userPaid = {
-//                 method: 'POST',
-//                 uri: 'http://localhost:8080/users/paid',
-//                 qs: {"user_id": userID},
-//                 headers: {}
-//             });
-//             rp(userPaid)
-//                 .then(function (response){
-//                 console.log("User has paid!");
-//                 if(response === true){
-//                     res.redirect('/user')
-//                 }
-//                 else{
-//                     console.log("Something went horribly wrong!");
-//                     res.redirect('/checkout')
-//                 }
-//             })
-//             .catch(function(err){
-//                 console.log("Something went wrong!");
-//             });
-//             //res.redirect("/users"));
-// });
-
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
-
-// router.get('/checkout', function(req, res, next) {
-//     res.render('checkout');
-// });
 
 router.get('/callback',
   passport.authenticate('auth0', {
