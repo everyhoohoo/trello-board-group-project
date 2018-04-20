@@ -5,8 +5,13 @@ var rp = require("request-promise");
 var router = express.Router();
 
 router.post("/", ensureLoggedIn, function(req, res) {
-    var user = req.user;
-    var userPaid;
+    var userID = req.user.user_id;
+    var userPaid = {
+        method: "POST",
+        uri: "http://localhost:8080/users/" + userID,
+        qs: {},
+        headers: {}
+    };
 
     let amount = 999;
 
@@ -23,17 +28,8 @@ router.post("/", ensureLoggedIn, function(req, res) {
                 customer: customer.id
             })
         )
-        .then(
-            charge =>
-                (userPaid = {
-                    method: "POST",
-                    uri: "http://localhost:8080/users/paid",
-                    qs: { user_id: userID },
-                    headers: {}
-                })
-        );
-    rp(userPaid)
-        .then(function(response) {
+        .then(charge =>
+        rp(userPaid).then(function(response) {
             console.log("User has paid!");
             if (response === true) {
                 res.redirect("/user");
@@ -44,7 +40,7 @@ router.post("/", ensureLoggedIn, function(req, res) {
         })
         .catch(function(err) {
             console.log("Something went wrong!");
-        });
+        }));
 });
 
 module.exports = router;

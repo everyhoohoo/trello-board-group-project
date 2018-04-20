@@ -89,8 +89,8 @@ function getUsersPaid(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); 
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
-    var userID = req.query.user_id;
-      UserProfile.findAll({where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
+    var userID = req.params.id;
+      UserProfile.findAll({attributes: ['stripe_paid']},{where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
       if (users === undefined || users.length == 0){
         res.send(404);
       }
@@ -105,10 +105,12 @@ function updateUsersPaid(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); 
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
-    var userID = req.query.user_id;
+    var userID = req.params.id;
     var stripePaid = true;
     UserProfile.update({stripe_paid: stripePaid}, {where: {user_id: userID}}).then((users)=>{
-      res.send(users);
+      UserProfile.findAll({attributes: ['stripe_paid']},{where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users)=>{
+        res.send(users);
+      })
   });
 
 }
@@ -421,8 +423,8 @@ server.post('/swimlanes', postSwimLanes);
 server.post('/swimlanes/:swimlane_id', updateSwimlaneBySwimlaneId);
 server.post('/cards', postCards);
 server.post('/cards/:cardId', updateCardByCardId);
-server.post('/users/paid', updateUsersPaid);
-server.opts('/users/paid', function(req, res, next) {
+server.post('/users/:id', updateUsersPaid);
+server.opts('/users/:id', function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");

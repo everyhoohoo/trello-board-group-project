@@ -24,7 +24,8 @@
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
     "requirejs": "^2.3.5",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "stripe": "^5.8.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.2"
