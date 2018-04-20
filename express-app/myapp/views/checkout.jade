@@ -33,5 +33,5 @@ block content
 
         .row
             .col.align-self-center
-                form.checkout(action='./user', method='POST')
-                    script.stripe-button(src='https://checkout.stripe.com/checkout.js', data-key='pk_test_6pRNASCoBOKtIshFeQd4XMUh', data-amount='999', data-name='Stripe.com', data-description='Example charge', data-image='https://stripe.com/img/documentation/checkout/marketplace.png', data-locale='auto', data-zip-code='true')
+                form.checkout(action='/charge', method='POST')
+                    script.stripe-button(src='https://checkout.stripe.com/checkout.js', data-key='pk_test_U5isW57QrCTPsthCYETt8vNM', data-amount='999', data-name='Stripe.com', data-description='Example charge', data-image='https://stripe.com/img/documentation/checkout/marketplace.png', data-locale='auto', data-zip-code='true')

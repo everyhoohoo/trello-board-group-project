@@ -8,7 +8,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 // setup the mysql configuration
-const sql = new Sequelize('trello', 'root', 'P@tches1238', {
+const sql = new Sequelize('trello', 'root', 's1mplePa55word456951', {
   host: 'localhost',
   port: 3306,
   dialect: 'mysql',
@@ -32,6 +32,7 @@ sql
 
 var UserProfile = sql.define('user', {
   user_id:{ type: Sequelize.STRING, primaryKey: true,},
+  stripe_paid:{type: Sequelize.BOOLEAN, defaultValue: false}
 });
 
 var TrelloBoards = sql.define('board', {
@@ -73,8 +74,9 @@ var Swimlane = function (id, board_id, name) {
 
 }
 
-var User = function (user_id) {
+var User = function (user_id, stripe_paid) {
   this.user_id = user_id;
+  this.stripe_paid = stripe_paid;
 }
 
 var Board = function (board_id, user_id, name){
@@ -83,11 +85,39 @@ var Board = function (board_id, user_id, name){
   this.name = name;
 }
 
+function getUsersPaid(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+    var userID = req.query.user_id;
+      UserProfile.findAll({where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
+      if (users === undefined || users.length == 0){
+        res.send(404);
+      }
+      else {
+        res.send(users);
+      }
+    });
+
+}
+
+function updateUsersPaid(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+    var userID = req.query.user_id;
+    var stripePaid = true;
+    UserProfile.update({stripe_paid: stripePaid}, {where: {user_id: userID}}).then((users)=>{
+      res.send(users);
+  });
+
+}
+
 function getUsers(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   var userID = req.query.user_id;
-  console.log("You are in getUsers " + userID);
+  //console.log("You are in getUsers " + userID);
   UserProfile.findAll({where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
     if (users === undefined || users.length == 0){
       res.send(404);
@@ -375,6 +405,7 @@ function deleteBoard(req, res, next){
 }
 
 // Set up our routes and start the server
+server.get('/users/paid', getUsersPaid);
 server.get('/users', getUsers);
 server.get('/boards', getBoards);
 server.get('/swimlanes', getSwimLanes);
@@ -390,6 +421,14 @@ server.post('/swimlanes', postSwimLanes);
 server.post('/swimlanes/:swimlane_id', updateSwimlaneBySwimlaneId);
 server.post('/cards', postCards);
 server.post('/cards/:cardId', updateCardByCardId);
+server.post('/users/paid', updateUsersPaid);
+server.opts('/users/paid', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
 server.post('/swimlanes/cards/:cardId', updateCardSWByCardId);
 server.opts('/swimlanes/cards/:cardId', function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');

@@ -13,10 +13,6 @@ block content
                         h4 You are logged in!
                     else
                         h4 You are not logged in! Please #[a(href="/login") Log In] to continue.
-                col-sm-1
-                    form.checkout(action='./user', method='POST')
-                        script.stripe-button(src='https://checkout.stripe.com/checkout.js', data-key='pk_test_6pRNASCoBOKtIshFeQd4XMUh', data-amount='999', data-name='Stripe.com', data-description='Example charge', data-image='https://stripe.com/img/documentation/checkout/marketplace.png', data-locale='auto', data-zip-code='true')
-
             .row
                 .col-sm-8
                     a.button#btn-home-view.btn.btn-primary.btn-margin.home(href='/') Home
