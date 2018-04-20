@@ -5,7 +5,7 @@ var rp = require("request-promise");
 var router = express.Router();
 
 router.post("/", ensureLoggedIn, function(req, res) {
-    var user = req.user;
+    var userID = req.user_id;
     var userPaid;
 
     let amount = 999;
