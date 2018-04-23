@@ -29,26 +29,27 @@ sql
   .catch(err => {
     console.log("There was an error when connecting!");
   });
-
+/*UserProfile stores user ids and whether they've paid.*/
 var UserProfile = sql.define('user', {
   user_id:{ type: Sequelize.STRING, primaryKey: true,},
   stripe_paid:{type: Sequelize.BOOLEAN, defaultValue: false}
 });
 
+/*TrelloBoards are the boards that users have created.*/
 var TrelloBoards = sql.define('board', {
   board_id:{ type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
   user_id:{ type: Sequelize.STRING,},
   name:{ type: Sequelize.STRING,}
 });
 
-//Columnlane is the same as a swimlane
+//Columnlane is the same as a swimlane, the swimlanes the users have created.
 var Columnlane = sql.define('swimlane', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
   board_id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4},
   name: { type: Sequelize.STRING }
 });
 
-//RowCells is the same as a card
+//RowCells is the same as a card, the cards the users have created.
 var RowCells = sql.define('card', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
   swimlane_id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4 },
@@ -56,6 +57,7 @@ var RowCells = sql.define('card', {
   description: { type: Sequelize.STRING }
 });
 
+/*Updates information or deletes it, if information is linked to another table.*/
 UserProfile.hasMany(TrelloBoards, {foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 TrelloBoards.hasMany(Columnlane, {foreignKey: 'board_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 Columnlane.hasMany(RowCells, {foreignKey: 'swimlane_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});

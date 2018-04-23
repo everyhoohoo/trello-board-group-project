@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+/*Routing for when user logs in*/
 router.get('/login', passport.authenticate('auth0', {
   clientID: env.AUTH0_CLIENT_ID,
   domain: env.AUTH0_DOMAIN,
@@ -27,11 +28,13 @@ router.get('/login', passport.authenticate('auth0', {
     res.redirect("/checkout");
 });
 
+/*Routing for when user logs out*/
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
 
+/*Routing for callback for when a login is successful and not successful*/
 router.get('/callback',
   passport.authenticate('auth0', {
     failureRedirect: '/failure'
@@ -41,6 +44,7 @@ router.get('/callback',
   }
 );
 
+/*Routing for when theres an error or a page has not been found.*/
 router.get('/failure', function(req, res) {
   var error = req.flash("error");
   var error_description = req.flash("error_description");

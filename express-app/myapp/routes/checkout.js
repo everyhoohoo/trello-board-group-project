@@ -4,10 +4,8 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 const router = express.Router();
 var rp = require('request-promise');
 
-/* GET user profile. */
+/*After logging in you will be redirected here.*/
 router.get('/', ensureLoggedIn, function(req, res, next) {
-// insure that user exists
-//if not create user
     var userPF;
     var userID = req.user.user_id;
     var userCheck = {
@@ -18,18 +16,21 @@ router.get('/', ensureLoggedIn, function(req, res, next) {
     };
     rp(userCheck)
         .then(function (response){
-            console.log("1. This is hopfully saying false or " + response);
+            /*Checks if user that logged in has paid, if not render checkout.jade for user to pay.*/
+            //console.log("1. This is hopfully saying false or " + response);
             if(response === false){
-                console.log("2. This is hopfully saying false or " + response);
+                //console.log("2. This is hopfully saying false or " + response);
                 res.render('checkout');
             }
             else{
-                console.log("3. It didn't work right." + response);
+                /*If they have redirect to user.js*/
+                //console.log("3. It didn't work right." + response);
                 res.redirect('/user')
             }
 
         })
         .catch(function (err){
+            /*Creates user and adds them to our database.*/
             console.log("User not found!")
             var postUser = {
                 method: 'POST',

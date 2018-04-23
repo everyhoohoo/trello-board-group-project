@@ -23,6 +23,8 @@ rp(userCheck)
 
   })
   .catch(function (err){
+    /*This was for before we had a checkout page, if user logging in somehow finds there way to this part of the code.
+    then we have an issue to fix.*/
     console.log("User not found!")
     var postUser = {
       method: 'POST',
