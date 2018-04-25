@@ -52,10 +52,12 @@ function addBoardCard (id, userID, boardName) {
 
     var boardName = $("<a href='"+boardUrl+"'>"+ boardName +"</a>");
 
-    var boardButtons = $('<span class = "buttons"><i class="fas fa-pencil-alt icons"></i><input class="delBtn" type="button" value="X" click=""></input></span>');
-    
-    newBoardCard.append(boardButtons);
+    var boardButtons = $('<span class = "buttons"><input class="fa-pencil-alt userboard-buttons" type="button" value="Edit" click=""></input><input class="userboard-buttons delBtn" type="button" value="Delete" click=""></input></span>');
+
+// <i class="fas fa-pencil-alt icons">
+
     newBoardCard.append(boardName);
+    newBoardCard.append(boardButtons);
 
     boardButtons.on('click', '.fa-pencil-alt', function() {
         var newName = prompt('Rename Board');
