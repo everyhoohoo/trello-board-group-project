@@ -126,13 +126,13 @@
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     cursor: default;
     margin: 5px;
 }
 
 .fa-layers-text {
-    font-weight: 900;
+    font-weight:900;
     font-size: 15px;
 }
 
@@ -151,15 +151,46 @@
 }
 
 .userboards {
+    display: inline-block;
     width: 50%;
     background-color: lightseagreen;
-    border: solid 3px cornflowerblue;
+    /*border: solid 3px cornflowerblue;*/
     color: white;
     padding: 20px 0px;
     text-align: center;
     margin: 15px 7px;
     font-size: 30px;
     cursor: pointer;
+}
+.userboards a:link {
+    color: white;
+}
+
+.userboards:hover .userboard-buttons {
+    visibility: visible;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.userboards:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.userboard-buttons {
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+    cursor: default;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 0px 10px;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    visibility: hidden;
+}
+.userboard-buttons:hover {
+    background-color: white;
+    opacity: 0.5;
+    color: lightseagreen;
 }
 
 .createSwimlane {
@@ -171,15 +202,16 @@
     text-align: center;
 }
 
-.delBtn {
-    border-radius: 4px;
-    background-color: #212529;
-    border-color: #212529;
-    color: #cfcfcf;
-    font-size: 15px;
-    cursor: default;
-    text-align: center;
-}
+/*.delBtn {*/
+    /*background-color: lightseagreen;*/
+    /*color: white;*/
+    /*font-size: 25px;*/
+    /*cursor: default;*/
+    /*text-align: center;*/
+    /*border-color: lightseagreen;*/
+    /*!*display: none;*!*/
+/*}*/
+
 
 .content {
     display: none;
