@@ -11,20 +11,22 @@ router.get('/', ensureLoggedIn, function(req, res, next) {
     var userCheck = {
         method: 'GET',
         uri: 'http://localhost:8080/users/paid',
+        //json: true,
         qs: {"user_id": userID},
         headers: {}
     };
     rp(userCheck)
         .then(function (response){
             /*Checks if user that logged in has paid, if not render checkout.jade for user to pay.*/
-            //console.log("1. This is hopfully saying false or " + response);
-            if(response === false){
-                //console.log("2. This is hopfully saying false or " + response);
+            console.log("USer id is : "+ userID);
+            console.log("1. This is the response " + response.length);
+            if(response.length === 23){
+                console.log("2. Same response " + response);
                 res.render('checkout');
             }
             else{
                 /*If they have redirect to user.js*/
-                //console.log("3. It didn't work right." + response);
+                console.log("3. Still the same " + response);
                 res.redirect('/user')
             }
 

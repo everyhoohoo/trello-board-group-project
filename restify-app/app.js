@@ -8,7 +8,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 // setup the mysql configuration
-const sql = new Sequelize('trello', 'root', 'P@tches1238', {
+const sql = new Sequelize('trello', 'root', 's1mplePa55word456951', {
   host: 'localhost',
   port: 3306,
   dialect: 'mysql',
@@ -91,8 +91,9 @@ function getUsersPaid(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); 
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
-    var userID = req.params.id;
-      UserProfile.findAll({attributes: ['stripe_paid']},{where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
+    var userID = req.query.user_id;
+    console.log(userID);
+      UserProfile.findAll({where: {user_id: userID}, attributes: ['stripe_paid'], order: [['createdAt', 'ASC']]}).then((users) => {
       if (users === undefined || users.length == 0){
         res.send(404);
       }
