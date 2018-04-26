@@ -40,7 +40,7 @@
 }
 
 .container {
-    border: solid 2px #70ff68;
+    /*border: solid 2px #70ff68;*/
     background-color: #125e53;
     height: 94vh;
     display: flex;
@@ -97,8 +97,7 @@
     color: white;
     margin: 5px;
     text-align: center;
-    font-size: 18px;
-    border: solid 2px #000000;
+    font-size: 20px;
 }
 
 .cardName {
@@ -140,15 +139,15 @@
     size: 15px;
 }
 
-.addCardBtn {
-    border-radius: 4px;
-    background-color: #212529;
-    border-color: #212529;
-    color: #cfcfcf;
-    font-size: 15px;
-    text-align: center;
-    cursor: default;
-}
+/*.addCardBtn {*/
+    /*border-radius: 4px;*/
+    /*background-color: #212529;*/
+    /*border-color: #212529;*/
+    /*color: #cfcfcf;*/
+    /*font-size: 15px;*/
+    /*text-align: center;*/
+    /*cursor: default;*/
+/*}*/
 
 .userboards {
     display: inline-block;
@@ -193,25 +192,80 @@
     color: lightseagreen;
 }
 
-.createSwimlane {
-    border-radius: 4px;
-    background-color: #212529;
-    border-color: #70ff68;
-    color: #70ff68;
-    margin: 0 auto;
-    text-align: center;
+.swimlanesButtons:hover {
+    background-color: white;
+    opacity: 0.5;
+    color: lightseagreen;
 }
 
-/*.delBtn {*/
-    /*background-color: lightseagreen;*/
-    /*color: white;*/
-    /*font-size: 25px;*/
-    /*cursor: default;*/
-    /*text-align: center;*/
-    /*border-color: lightseagreen;*/
-    /*!*display: none;*!*/
-/*}*/
+.createSwimlane {
+    border-radius: 4px;
+    background-color: lightseagreen;
+    /*border-color: #70ff68;*/
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.5em !important;
+    padding: 10px 20px !important;
+}
 
+.createSwimlane:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.swimlanesButtons {
+    background-color: transparent;
+    color: white;
+    font-size: 10px;
+    cursor: default;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 0px 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    visibility: hidden;
+}
+
+.swimlane:hover .swimlanesButtons {
+    visibility: visible;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.swimlane:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardButtons {
+    background-color: transparent;
+    color: lightgrey;
+    font-size: 10px;
+    cursor: default;
+    text-align: center;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    margin: 0px 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    visibility: hidden;
+}
+
+.cardButtons:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    opacity: 0.5;
+    color: lightseagreen;
+}
+
+.card:hover .cardButtons {
+    visibility: visible;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.description {
+    color: lightgrey;
+    padding: 0px 5px;
+}
 
 .content {
     display: none;

@@ -51,7 +51,7 @@ function addBoardCard(id, userID, boardName) {
 
     var boardName = $("<a href='" + boardUrl + "'>" + boardName + "</a>");
 
-    var boardButtons = $('<span class = "buttons"><input class="fa-pencil-alt userboard-buttons" type="button" value="Edit" click=""></input><input class="userboard-buttons delBtn" type="button" value="Delete" click=""></input></span>');
+    var boardButtons = $('<span class = "buttons"><input class="fa-pencil-alt userboard-buttons" type="button" value="Edit" click=""></input><input class="userboard-buttons delBdBtn" type="button" value="Delete" click=""></input></span>');
 
     newBoardCard.append(boardName);
     newBoardCard.append(boardButtons);
@@ -65,7 +65,7 @@ function addBoardCard(id, userID, boardName) {
         updateBoard(id, newName);
     });
 
-    boardButtons.on("click", ".delBtn", function() {
+    boardButtons.on("click", ".delBdBtn", function() {
         var rm = $(this)
             .closest(".userboards")
             .attr("id");

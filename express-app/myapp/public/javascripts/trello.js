@@ -64,10 +64,9 @@ function addSwimLane(id, boardID, name) {
     newSLane.append(slName);
 
     var laneButtons = $(
-        '<span class = "buttons"><input class= "addCardBtn" type="button" value="Add Card" click=""></input><i class="fas fa-pencil-alt icons"></i><input class="delBtn" type="button" value="X" click=""></input></span>'
+        '<span class = "buttons"><input class= "addCardBtn swimlanesButtons" type="button" value="Add Card" click=""></input><input class="fa-pencil-alt swimlanesButtons icons" type="button" value="Edit" click=""></input><input class="delBtn swimlanesButtons" type="button" value="Delete" click=""></input></span>'
     );
     newSLane.append(laneButtons);
-
     laneButtons.on("click", ".delBtn", function() {
         var rm = $(this)
             .closest(".swimlane")
@@ -135,19 +134,22 @@ function addCard(id, swimlaneID, title, description) {
 
     var cardButtons = $('<span class = "buttons"></span>');
 
-    var titleEditBtn = $(
-        '<span class="fa-layers" id="titleEditBtn"><i class="fas fa-edit"></i><span class="fa-layers-text fa-inverse" data-fa-transform="shrink-5 left-3">T</span>'
+    var titleEditBtn;
+    titleEditBtn = $(
+        '<span><input class="titleEditBtn cardButtons" type="button" value="Rename" click=""></span>'
     );
+
+// <i class="fas fa-edit"></i><span class="fa-layers-text fa-inverse" data-fa-transform="shrink-5 left-3">
 
     cardButtons.append(titleEditBtn);
 
     var descEditBtn = $(
-        '<span class="fa-layers" id="descEditBtn"><i class="fas fa-edit"></i><span class="fa-layers-text fa-inverse" data-fa-transform="shrink-5 left-3">D</span>'
+        '<span> <input class = "descEditBtn cardButtons" type="button" value="Edit" click=""></span>'
     );
     cardButtons.append(descEditBtn);
 
     var delCardBtn = $(
-        '<input class = "delBtn" type="button" value="X" click=""></span>'
+        '<input class = "delBtn cardButtons" type="button" value="Delete" click=""></span>'
     );
     cardButtons.append(delCardBtn);
 
@@ -165,11 +167,11 @@ function addCard(id, swimlaneID, title, description) {
     card.append(cardButtons);
 
     var cardDescription = $(
-        '<div class :"description">' + description + "</div>"
+        '<div class= "description">' + description + "</div>"
     );
     card.append(cardDescription);
 
-    cardButtons.on("click", "#titleEditBtn", function() {
+    cardButtons.on("click", ".titleEditBtn", function() {
         var newTitle = prompt("Rename your card:");
         if (newTitle === null) {
             return;
@@ -177,7 +179,7 @@ function addCard(id, swimlaneID, title, description) {
         cardName.text(newTitle);
         updateCard(id, newTitle, description);
     });
-    cardButtons.on("click", "#descEditBtn", function() {
+    cardButtons.on("click", ".descEditBtn", function() {
         var newDescription = prompt("Edit Description:");
         if (newDescription === null) {
             return;
