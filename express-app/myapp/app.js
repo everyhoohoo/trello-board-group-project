@@ -22,7 +22,7 @@ const strategy = new Auth0Strategy(
   {
     domain: 'agilesharkboard.auth0.com',
     clientID: 'x6cdAQRT0ecZm93G8aEoXvXwmorejhSk',
-    clientSecret: 'jW8pcDi7-hMnJUvboE9bhROwDlcSUZ1GgoxO-E9Z3kqb6DWkanvJ8chzy7hlM36k',
+    clientSecret: 'SECRET',
     callbackURL: 'http://localhost:3000/callback'
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
