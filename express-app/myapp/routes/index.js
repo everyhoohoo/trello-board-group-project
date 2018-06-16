@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn();
-var stripe = require("stripe")("sk_test_mugLRsztRkawLMCl3KuoFy68");
+var stripe = require("stripe")("sk_test_KEY");
 var rp = require("request-promise");
 const router = express.Router();
 
