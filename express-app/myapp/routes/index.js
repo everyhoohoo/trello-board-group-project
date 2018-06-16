@@ -1,5 +1,8 @@
 const express = require('express');
 const passport = require('passport');
+const ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn();
+var stripe = require("stripe")("sk_test_mugLRsztRkawLMCl3KuoFy68");
+var rp = require("request-promise");
 const router = express.Router();
 
 const env = {
@@ -13,6 +16,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+/*Routing for when user logs in*/
 router.get('/login', passport.authenticate('auth0', {
   clientID: env.AUTH0_CLIENT_ID,
   domain: env.AUTH0_DOMAIN,
@@ -21,27 +25,26 @@ router.get('/login', passport.authenticate('auth0', {
   audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
   scope: 'openid profile'}),
   function(req, res) {
-    res.redirect("/user");
+    res.redirect("/checkout");
 });
 
+/*Routing for when user logs out*/
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
 
-// router.get('/board', function(req, res) {
-//   res.redirect('/user');
-// });
-
+/*Routing for callback for when a login is successful and not successful*/
 router.get('/callback',
   passport.authenticate('auth0', {
     failureRedirect: '/failure'
   }),
   function(req, res) {
-    res.redirect(req.session.returnTo || '/user');
+    res.redirect(req.session.returnTo || '/checkout');
   }
 );
 
+/*Routing for when theres an error or a page has not been found.*/
 router.get('/failure', function(req, res) {
   var error = req.flash("error");
   var error_description = req.flash("error_description");

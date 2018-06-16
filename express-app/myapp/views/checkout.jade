@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    .home-background-wallpaper
+    .background-wallpaper
         .container-fluid
             .row
                 .col-sm-8
@@ -13,6 +13,9 @@ block content
                         h4 You are logged in!
                     else
                         h4 You are not logged in! Please #[a(href="/login") Log In] to continue.
+                col-sm-1
+
+
             .row
                 .col-sm-8
                     a.button#btn-home-view.btn.btn-primary(href='/') Home
@@ -22,3 +25,13 @@ block content
                     else
                         a( id="qsLoginBtn" href="/login" ).btn.btn-primary Login
                 .col-sm-4
+    .container-fluid.checkout-wallpaper
+        .row
+            .col.align-self-center
+                p.checkout-title Don't want to be SHARK bait??
+                p.checkout-description (Save your life and subscribe to access your boards)
+
+        .row
+            .col.align-self-center
+                form.checkout(action='/charge', method='POST')
+                    script.stripe-button(src='https://checkout.stripe.com/checkout.js', data-key='pk_test_U5isW57QrCTPsthCYETt8vNM', data-amount='999', data-name='Stripe.com', data-description='Example charge', data-image='https://stripe.com/img/documentation/checkout/marketplace.png', data-locale='auto', data-zip-code='true')

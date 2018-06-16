@@ -29,25 +29,27 @@ sql
   .catch(err => {
     console.log("There was an error when connecting!");
   });
-
+/*UserProfile stores user ids and whether they've paid.*/
 var UserProfile = sql.define('user', {
   user_id:{ type: Sequelize.STRING, primaryKey: true,},
+  stripe_paid:{type: Sequelize.BOOLEAN, defaultValue: false}
 });
 
+/*TrelloBoards are the boards that users have created.*/
 var TrelloBoards = sql.define('board', {
   board_id:{ type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
   user_id:{ type: Sequelize.STRING,},
   name:{ type: Sequelize.STRING,}
 });
 
-//Columnlane is the same as a swimlane
+//Columnlane is the same as a swimlane, the swimlanes the users have created.
 var Columnlane = sql.define('swimlane', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
   board_id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4},
   name: { type: Sequelize.STRING }
 });
 
-//RowCells is the same as a card
+//RowCells is the same as a card, the cards the users have created.
 var RowCells = sql.define('card', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
   swimlane_id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4 },
@@ -55,9 +57,10 @@ var RowCells = sql.define('card', {
   description: { type: Sequelize.STRING }
 });
 
+/*Updates information or deletes it, if information is linked to another table.*/
 UserProfile.hasMany(TrelloBoards, {foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 TrelloBoards.hasMany(Columnlane, {foreignKey: 'board_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
-Columnlane.hasMany(RowCells, {foreignKey: 'swimlanes', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Columnlane.hasMany(RowCells, {foreignKey: 'swimlane_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 sql.sync();
 
@@ -73,8 +76,9 @@ var Swimlane = function (id, board_id, name) {
 
 }
 
-var User = function (user_id) {
+var User = function (user_id, stripe_paid) {
   this.user_id = user_id;
+  this.stripe_paid = stripe_paid;
 }
 
 var Board = function (board_id, user_id, name){
@@ -83,11 +87,42 @@ var Board = function (board_id, user_id, name){
   this.name = name;
 }
 
+function getUsersPaid(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+    var userID = req.query.user_id;
+    console.log(userID);
+      UserProfile.findAll({where: {user_id: userID}, attributes: ['stripe_paid'], order: [['createdAt', 'ASC']]}).then((users) => {
+      if (users === undefined || users.length == 0){
+        res.send(404);
+      }
+      else {
+        res.send(users);
+      }
+    });
+
+}
+
+function updateUsersPaid(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+    var userID = req.params.id;
+    var stripePaid = true;
+    UserProfile.update({stripe_paid: stripePaid}, {where: {user_id: userID}}).then((users)=>{
+      UserProfile.findAll({attributes: ['stripe_paid']},{where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users)=>{
+        res.send(users);
+      })
+  });
+
+}
+
 function getUsers(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   var userID = req.query.user_id;
-  console.log("You are in getUsers " + userID);
+  //console.log("You are in getUsers " + userID);
   UserProfile.findAll({where: {user_id: userID}, order: [['createdAt', 'ASC']]}).then((users) => {
     if (users === undefined || users.length == 0){
       res.send(404);
@@ -263,7 +298,7 @@ function updateSwimlaneBySwimlaneId(req, res, next){
 
   var newName = req.body.name;
 
-  Columnlane.update({ name: newName }, { where: { swimlane_id: swimlaneid }})
+  Columnlane.update({ name: newName }, { where: { id: swimlaneid }})
     .then((swimlanes)=>{
       res.send(swimlanes);
     });
@@ -315,19 +350,24 @@ function getTrelloByUserBoard(req, res, next){
       res.send(boards);
     }
   });
+}
 
+function updateBoardName(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  var boardID = req.params.id;
+  var boardName = req.body.name;
+  
+  TrelloBoards.update({ name: boardName}, {where: { board_id: boardID}})
+    .then((boards)=>{
+      res.send(boards);
+    });
 }
 
 function deleteSwimlane(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   var delSwimlane = req.params.id;
-
-  RowCells.destroy({
-    where: {swimlane_id: delSwimlane}
-  }).then(()=>{
-    res.send();
-  });
 
   Columnlane.destroy({
     where: {id: delSwimlane}
@@ -350,7 +390,27 @@ function deleteCard(req, res, next){
   
 }
 
+function deleteBoard(req, res, next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  var delBoard = req.params.id;
+
+  TrelloBoards.destroy({
+    where: {board_id: delBoard}
+  }).then(()=>{
+    res.send();
+  });
+
+  // Columnlane.destroy({
+  //   where: {id: delSwimlane}
+  // }).then(()=>{
+  //   res.send();
+  // });
+  
+}
+
 // Set up our routes and start the server
+server.get('/users/paid', getUsersPaid);
 server.get('/users', getUsers);
 server.get('/boards', getBoards);
 server.get('/swimlanes', getSwimLanes);
@@ -366,7 +426,30 @@ server.post('/swimlanes', postSwimLanes);
 server.post('/swimlanes/:swimlane_id', updateSwimlaneBySwimlaneId);
 server.post('/cards', postCards);
 server.post('/cards/:cardId', updateCardByCardId);
-server.post('swimlanes/cards/:cardId', updateCardSWByCardId);
+server.post('/users/:id', updateUsersPaid);
+server.opts('/users/:id', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
+server.post('/swimlanes/cards/:cardId', updateCardSWByCardId);
+server.opts('/swimlanes/cards/:cardId', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
+server.post('/boards/:id', updateBoardName);
+server.opts('/boards/:id', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
 
 server.del('/swimlanes/:id', deleteSwimlane);
 server.opts('/swimlanes/:id', function(req, res, next) {
@@ -387,6 +470,15 @@ server.opts('/swimlanes/:swimlane_id/cards', function(req, res, next) {
 
 server.del('/cards/:id', deleteCard);
 server.opts('/cards/:id', function(req, res, next) {
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(204);
+    return next();
+});
+
+server.del('/boards/:id', deleteBoard);
+server.opts('/boards/:id', function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, DELETE');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");

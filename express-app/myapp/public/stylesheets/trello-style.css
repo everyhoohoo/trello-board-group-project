@@ -1,5 +1,8 @@
 ::-webkit-scrollbar-button {
-    display: block; height: 13px; border-radius: 0px; background-color: #001c0d;
+    display: block;
+    height: 13px;
+    border-radius: 0px;
+    background-color: #001c0d;
 }
 
 ::-webkit-scrollbar-button:hover {
@@ -7,7 +10,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #000000; border-radius: 10px;
+    background-color: #000000;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -19,7 +23,8 @@
 }
 
 ::-webkit-scrollbar-track:hover {
-    background-color: #80ff80; border-radius: 0px;
+    background-color: #80ff80;
+    border-radius: 0px;
 }
 
 ::-webkit-scrollbar {
@@ -29,11 +34,13 @@
 .w3-container {
     color: #337ab7;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-
 .container {
-    border: solid 2px #70FF68;
+    /*border: solid 2px #70ff68;*/
     background-color: #125e53;
     height: 94vh;
     display: flex;
@@ -42,14 +49,33 @@
 }
 
 .board {
-    border: solid 2px #70FF68;
+    border: solid 2px #70ff68;
     background-color: #125e53;
     width: 95%;
     height: 94vh;
     display: flex;
     overflow: auto;
     margin: 20px;
+}
 
+.checkout {
+    margin-top: 75px;
+    text-align: center;
+}
+
+.checkout-title {
+    font-size: 75px;
+    color: black;
+    text-align: center;
+    margin-top: 100px;
+    text-shadow: 2px 2px 8px #ff0000;
+}
+
+.checkout-description {
+    font-size: 30px;
+    color: black;
+    text-align: center;
+    text-shadow: 2px 2px 8px #ff0000;
 }
 
 .swimlane {
@@ -64,15 +90,14 @@
 .boardName {
     font-size: 50px;
     text-align: center;
-    padding:30px 10px;
+    padding: 30px 10px;
 }
 
 .swimelaneName {
     color: white;
     margin: 5px;
     text-align: center;
-    font-size: 18px;
-    border: solid 2px #000000;
+    font-size: 20px;
 }
 
 .cardName {
@@ -81,7 +106,7 @@
     margin: 5px;
     text-align: center;
     font-size: 15px;
-    padding:3px;
+    padding: 3px;
 }
 
 .card {
@@ -100,34 +125,35 @@
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     cursor: default;
     margin: 5px;
 }
 
 .fa-layers-text {
     font-weight:900;
-    font-size: 15px
+    font-size: 15px;
 }
 
 .fa-edit {
-    size: 15px
+    size: 15px;
 }
 
-.addCardBtn {
-    border-radius: 4px;
-    background-color: #212529;
-    border-color: #212529;
-    color: #CFCFCF;
-    font-size: 15px;
-    text-align: center;
-    cursor: default;
-}
+/*.addCardBtn {*/
+    /*border-radius: 4px;*/
+    /*background-color: #212529;*/
+    /*border-color: #212529;*/
+    /*color: #cfcfcf;*/
+    /*font-size: 15px;*/
+    /*text-align: center;*/
+    /*cursor: default;*/
+/*}*/
 
 .userboards {
+    display: inline-block;
     width: 50%;
     background-color: lightseagreen;
-    border: solid 3px cornflowerblue;
+    /*border: solid 3px cornflowerblue;*/
     color: white;
     padding: 20px 0px;
     text-align: center;
@@ -135,32 +161,114 @@
     font-size: 30px;
     cursor: pointer;
 }
-
-.createSwimlane {
-    border-radius: 4px;
-    background-color: #212529;
-    border-color: #70FF68;
-    color: #70FF68;
-    margin: 0 auto;
-    text-align: center;
+.userboards a:link {
+    color: white;
 }
 
-.delBtn {
-    border-radius: 4px;
-    background-color: #212529;
-    border-color: #212529;
-    color: #CFCFCF;
+.userboards:hover .userboard-buttons {
+    visibility: visible;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.userboards:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.userboard-buttons {
+    background-color: transparent;
+    color: white;
     font-size: 15px;
     cursor: default;
     text-align: center;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 0px 10px;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    visibility: hidden;
+}
+.userboard-buttons:hover {
+    background-color: white;
+    opacity: 0.5;
+    color: lightseagreen;
+}
+
+.swimlanesButtons:hover {
+    background-color: white;
+    opacity: 0.5;
+    color: lightseagreen;
+}
+
+.createSwimlane {
+    border-radius: 4px;
+    background-color: lightseagreen;
+    /*border-color: #70ff68;*/
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.5em !important;
+    padding: 10px 20px !important;
+}
+
+.createSwimlane:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.swimlanesButtons {
+    background-color: transparent;
+    color: white;
+    font-size: 10px;
+    cursor: default;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 0px 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    visibility: hidden;
+}
+
+.swimlane:hover .swimlanesButtons {
+    visibility: visible;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.swimlane:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardButtons {
+    background-color: transparent;
+    color: lightgrey;
+    font-size: 10px;
+    cursor: default;
+    text-align: center;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    margin: 0px 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    visibility: hidden;
+}
+
+.cardButtons:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    opacity: 0.5;
+    color: lightseagreen;
+}
+
+.card:hover .cardButtons {
+    visibility: visible;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.description {
+    color: lightgrey;
+    padding: 0px 5px;
 }
 
 .content {
     display: none;
-}
-
-.btn-margin {
-    margin-top: 7px
 }
 
 #login-view {
@@ -174,8 +282,15 @@
     height: 100vh;
 }
 
+.checkout-wallpaper {
+    background-image: url("shark-bait.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
 .background-wallpaper {
-    background-image: url("shark.jpg");
+    background-image: url("shark-banner2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -209,12 +324,17 @@
     margin-left: 30px;
 }
 
-.home {
-    border-color:cornflowerblue;
-    background-color: transparent;
-    color: lightseagreen;
-    font-size: 1.5em;
-    padding: 10px 20px;
-    margin-left: 35px;
-    margin-bottom: 20px;
+.btn-primary {
+    border-color: cornflowerblue !important;
+    background-color: transparent !important;
+    color: lightseagreen !important;
+    font-size: 1.5em !important;
+    padding: 10px 20px !important;
+    margin-left: 35px !important;
+    margin-bottom: 20px !important;
+}
+
+.btn-primary:hover {
+    background-color: cornflowerblue !important;
+    color: white !important;
 }
